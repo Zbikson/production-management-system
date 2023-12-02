@@ -21,6 +21,8 @@ if($_SESSION['role'] != 'admin'){
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/dashboard-style.css">
 
+    <script src="/scripts/showMenu.js"></script>
+
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
@@ -36,7 +38,7 @@ if($_SESSION['role'] != 'admin'){
         <ol>
             <li><i class="bi bi-collection"></i> Zlecenia</li>
                 <ul>
-                    <a href=""><li>Dodaj zlecenie</li></a>
+                    <a href="#"><li>Dodaj zlecenie</li></a>
                     <li>Edytuj zlecenie</li>
                     <li>Dodaj zlecenie</li>
                 </ul>
@@ -54,7 +56,6 @@ if($_SESSION['role'] != 'admin'){
         </ol>
 
     </div>
-
 
 <div class="content">
 
@@ -78,8 +79,8 @@ if($_SESSION['role'] != 'admin'){
 </div>
 
 <div class="main-content">
-
-    <h2>Dodaj zlecenie</h2>
+    
+<h2>Dodaj zlecenie</h2>
     <form>
         <label>Kontarhent </label>
         <input type="text" name="contrahent" id="contrahent">
@@ -89,6 +90,7 @@ if($_SESSION['role'] != 'admin'){
         <input type="text" name="contrahent" id="contrahent">
         <button type="submit" id="submit-btn">Dodaj</button>
     </form>
+
 </div>
 </div>
 </div>

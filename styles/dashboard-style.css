@@ -130,7 +130,7 @@
     text-align: center;
     min-width: 80px;
     max-width: 100px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease, color 0.2s ease;
 }
 
 .control-panel a{
@@ -149,7 +149,6 @@
     display: none;
 }
 
-
 .control-panel #panel:hover{
     cursor: pointer;
     background-color: #3d78bc;
@@ -160,7 +159,7 @@
     cursor: pointer;
     background-color: #912525;
     border: 1px solid #912525;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease, color 0.2s ease;
 }
 
 .main-content{
@@ -234,4 +233,47 @@ a:hover {
 a:active {
     text-decoration: none;
     color: #fff;
+}
+
+.main-content #search-bar{
+    margin:10px;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+}
+
+.main-content #search-bar form{
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: 10px;
+    border: 2px solid #2a2b39;
+    background-color: #fff;
+}
+
+.main-content #search-bar form input{
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    margin-left: 5px;
+}
+
+.main-content #search-bar button{
+    background-color: transparent;
+    border: none;
+    width: 10%;
+    font-size: 1.3rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main-content #search-bar button:hover{
+    color: #58a6ff;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.main-content #search-bar form input:focus{
+    outline: none;
 }

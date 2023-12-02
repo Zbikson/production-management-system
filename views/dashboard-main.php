@@ -66,6 +66,15 @@ if(!isset($_SESSION['user_id'])){
         <a id="logout" href="index.php?action=logout" title="Wyloguj"><i class="bi bi-box-arrow-right"></i>Wyloguj</a>
     </div>
 </div>
+
+<div class="main-content">
+    <div id="search-bar">
+        <form action="">
+            <input type="text" placeholder="Wyszukaj...">
+            <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
+    </div>
+</div>
 </div>
 </div>
 
