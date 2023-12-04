@@ -104,7 +104,7 @@
     padding: 5px;
 }
 
-.control-panel #panel{
+.control-panel #panel-btn{
     text-align: center;
     height: 30px;
     width: 60%;
@@ -118,7 +118,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.control-panel #logout{
+.control-panel #logout-btn{
     background-color: #c93232;
     border: 1px solid #c93232;
     height: 30px;
@@ -149,13 +149,13 @@
     display: none;
 }
 
-.control-panel #panel:hover{
+.control-panel #panel-btn:hover{
     cursor: pointer;
     background-color: #3d78bc;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.control-panel #logout:hover{
+.control-panel #logout-btn:hover{
     cursor: pointer;
     background-color: #912525;
     border: 1px solid #912525;
@@ -163,8 +163,9 @@
 }
 
 .main-content{
-    display: flex;
-    flex-direction: column;
+    display: none;
+    /* display: flex;
+    flex-direction: column; */
     justify-content: center;
     width: 90%;
     margin: 20px;
@@ -179,6 +180,7 @@
 }
 
 form{
+    width: 50%;
     display: flex;
     flex-direction: column;
 }
@@ -191,18 +193,19 @@ label{
 }
 
 input{
-    padding: 8px 10px;
+    padding: 6px 10px;
     font-size: 1.1rem;
 }
 
 #submit-btn{
     margin-top: 20px;
-    padding: 10px;
+    padding: 6px;
     color: #f5f5f5;
     font-size: 1.1rem;
     background-color: #04a777;
     border: 1px solid #04a777;
     border-radius: 2px;
+    min-width: 80px;
     width: 15%;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -235,11 +238,13 @@ a:active {
     color: #fff;
 }
 
+/* dashboard-main style */
+
 .main-content #search-bar{
     margin:10px;
     justify-content: flex-end;
-    align-items: center;
     display: flex;
+    flex-direction: column;
 }
 
 .main-content #search-bar form{
@@ -250,7 +255,7 @@ a:active {
     flex-direction: row;
     border: none;
     border-radius: 10px;
-    border: 2px solid #2a2b39;
+    border: 1px solid #2a2b39;
     background-color: #fff;
 }
 
@@ -276,4 +281,16 @@ a:active {
 
 .main-content #search-bar form input:focus{
     outline: none;
+}
+
+.main-content #table{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid #42445A;
+}
+
+.main-content #table td{
+    margin: 10px;
 }

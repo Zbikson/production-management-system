@@ -57,13 +57,13 @@ if(!isset($_SESSION['user_id'])){
     <div class="control-panel">
         <?php
         if($_SESSION['role'] == 'admin'){
-            echo '<a id="panel" href="index.php?action=dashboard-admin" title="Panel zleceń"><i class="bi bi-terminal"></i>Panel administratora</a>';
+            echo '<a id="panel-btn" href="index.php?action=dashboard-admin" title="Panel zleceń"><i class="bi bi-terminal"></i>Panel administratora</a>';
         } else{
             echo '<a id="panel-disable" href="index.php?action=dashboard-admin" title="Panel zleceń">Panel administratora</a>';
         }
         ?>
         
-        <a id="logout" href="index.php?action=logout" title="Wyloguj"><i class="bi bi-box-arrow-right"></i>Wyloguj</a>
+        <a id="logout-btn" href="index.php?action=logout" title="Wyloguj"><i class="bi bi-box-arrow-right"></i>Wyloguj</a>
     </div>
 </div>
 
@@ -73,6 +73,42 @@ if(!isset($_SESSION['user_id'])){
             <input type="text" placeholder="Wyszukaj...">
             <button type="submit"><i class="bi bi-search"></i></button>
         </form>
+    <div id="table">
+    <table>
+        <thead>
+            <tr>
+                <th>Lp.</th>
+                <th>Numer zlecenia</th>
+                <th>Firma</th>
+                <th>Detal</th>
+                <th>Ilość</th>
+                <th>Data wykonania</th>
+                <th>Data wystawienia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Z0001</td>
+                <td>Firma A</td>
+                <td>NC0001</td>
+                <td>10</td>
+                <td>2023-01-01</td>
+                <td>2023-01-05</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Z0002</td>
+                <td>Firma B</td>
+                <td>NC0002</td>
+                <td>15</td>
+                <td>2023-02-10</td>
+                <td>2023-02-15</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
     </div>
 </div>
 </div>

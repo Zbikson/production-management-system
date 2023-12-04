@@ -14,7 +14,6 @@ class AuthController {
             if ($user && $password) { //$user->verifyPassword($password)
                 // Logowanie udane
                 $_SESSION['user_id'] = $user->getId(); // Zapisujemy ID użytkownika w sesji
-
                 $_SESSION['username'] = $user->getUsername();
                 $_SESSION['name'] = $user->getName();
                 $_SESSION['lastname'] = $user->getLastname();
