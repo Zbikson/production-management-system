@@ -163,11 +163,11 @@
 }
 
 .main-content{
+    width: 90%;
     display: none;
     /* display: flex;
     flex-direction: column; */
     justify-content: center;
-    width: 90%;
     margin: 20px;
     padding: 20px;
 }
@@ -195,6 +195,11 @@ label{
 input{
     padding: 6px 10px;
     font-size: 1.1rem;
+}
+
+select{
+    font-size: 1.1rem;
+    padding: 6px 10px;
 }
 
 #submit-btn{
@@ -240,15 +245,44 @@ a:active {
 
 /* dashboard-main style */
 
-.main-content #search-bar{
-    margin:10px;
-    justify-content: flex-end;
-    display: flex;
-    flex-direction: column;
+.main-dashboard{
+    width: 90%;
+    /* display: flex;
+    flex-direction: column; */
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
 }
 
-.main-content #search-bar form{
-    width: 50%;
+.main-dashboard #header-main-content{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.main-dashboard #job-buttons{
+    margin-top: 20px;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-dashboard #job-buttons button{
+    font-size: 1.1rem;
+    margin-right: 20px;
+    width: 200px;
+    min-width: 200px;
+    height: 40px;
+}
+
+.main-dashboard #search-bar{
+    width: 70%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.main-dashboard #search-bar form{
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -259,31 +293,30 @@ a:active {
     background-color: #fff;
 }
 
-.main-content #search-bar form input{
+.main-dashboard #search-bar form input{
     width: 90%;
     background-color: transparent;
     border: none;
     margin-left: 5px;
 }
-
-.main-content #search-bar button{
+.main-dashboard #search-bar button{
+    margin: 5px;
     background-color: transparent;
     border: none;
     width: 10%;
     font-size: 1.3rem;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
-
-.main-content #search-bar button:hover{
+.main-dashboard #search-bar button:hover{
     color: #58a6ff;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.main-content #search-bar form input:focus{
+.main-dashboard #search-bar form input:focus{
     outline: none;
 }
 
-.main-content #table{
+.main-dashboard #table{
     display: flex;
     flex-direction: column;
     margin-top: 20px;
@@ -291,6 +324,6 @@ a:active {
     border: 1px solid #42445A;
 }
 
-.main-content #table td{
+.main-dashboard #table td{
     margin: 10px;
 }

@@ -67,47 +67,35 @@ if(!isset($_SESSION['user_id'])){
     </div>
 </div>
 
-<div class="main-content">
-    <div id="search-bar">
-        <form action="">
-            <input type="text" placeholder="Wyszukaj...">
-            <button type="submit"><i class="bi bi-search"></i></button>
-        </form>
+<div class="main-dashboard">
+    <div id="header-main-content">
+        <div id="job-buttons">
+            <button type="" id="start-job-btn">Rozpocznij czas pracy</button>
+            <button type="" id="end-job-btn">Zakończ czas pracy</button>
+        </div>
+        <div id="search-bar">
+            <form action="">
+                <input type="text" placeholder="Wyszukaj...">
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+    </div>
+    </div>
     <div id="table">
     <table>
         <thead>
             <tr>
-                <th>Lp.</th>
-                <th>Numer zlecenia</th>
-                <th>Firma</th>
-                <th>Detal</th>
-                <th>Ilość</th>
-                <th>Data wykonania</th>
-                <th>Data wystawienia</th>
+                <th>Lp.</th><th>Numer zlecenia</th><th>Firma</th><th>Detal</th><th>Ilość</th><th>Data wykonania</th><th>Data wystawienia</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>1</td>
-                <td>Z0001</td>
-                <td>Firma A</td>
-                <td>NC0001</td>
-                <td>10</td>
-                <td>2023-01-01</td>
-                <td>2023-01-05</td>
+                <td>1</td><td>Z0001</td><td>Firma A</td><td>NC0001</td><td>10</td><td>2023-01-01</td><td>2023-01-05</td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>Z0002</td>
-                <td>Firma B</td>
-                <td>NC0002</td>
-                <td>15</td>
-                <td>2023-02-10</td>
-                <td>2023-02-15</td>
+                <td>2</td><td>Z0002</td><td>Firma B</td><td>NC0002</td><td>15</td><td>2023-02-10</td><td>2023-02-15</td>
             </tr>
         </tbody>
     </table>
-    </div>
 
     </div>
 </div>

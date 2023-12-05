@@ -10,6 +10,13 @@ $authController = new AuthController();
 switch($action){
     case 'dashboard-admin':
         $authController->dashboardAdmin();
+        
+        if(isset($_SESSION['add_user'])){
+            $authController->addUser();
+            unset($_SESSION['add_user']);
+            break;
+        }
+
         break;
     case 'dashboard-main':
         $authController->dashboardMain();

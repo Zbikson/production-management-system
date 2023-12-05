@@ -40,8 +40,9 @@ class AuthController {
 
     }
 
-    public function register() {
+    public function addUser() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['add_user'];
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $name = $_POST['name'];
@@ -54,12 +55,12 @@ class AuthController {
 
             // Rejestracja udana
             // Przekierowanie lub wyświetlenie komunikatu sukcesu
-            $_SESSION['success_register'] = 'Zarejestrowano! Możesz się zalogować';
-            include 'views/login.php';
+            $_SESSION['success_register'] = 'Dodano użytkownika!';
+            header('Location: index.php?action=dashboard-admin');
             exit();
         } else {
             // Wyświetlenie formularza rejestracji
-            include 'views/register.php';
+            include 'views/login.php';
         }
     }
 

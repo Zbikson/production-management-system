@@ -24,8 +24,8 @@ class User{
 
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $stmt = $connection->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        $stmt->bind_param("ss", $this->username, $hashedPassword);
+        $stmt = $connection->prepare("INSERT INTO users (username, password, name, lastname, role) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $this->username, $hashedPassword, $this->name, $this->lastname, $this->role);
         $stmt->execute();
 
         $this->id = $connection->insert_id;
