@@ -49,7 +49,9 @@ if(!isset($_SESSION['user_id'])){
         if(isset($_SESSION['username']) && isset($_SESSION['name']) && isset($_SESSION['lastname'])){
             echo "Użytkownik: " . $_SESSION['username'] . " • ";
             echo "Imię: " . $_SESSION['name'] . " • ";
-            echo "Nazwisko: " . $_SESSION['lastname'];
+            echo "Nazwisko: " . $_SESSION['lastname'] . "<br>";
+            echo "Data: ". date('d/m/Y'); 
+            echo " Godzina: ". date(' H:i');
         }
         ?>
     </div>

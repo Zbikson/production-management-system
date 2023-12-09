@@ -24,7 +24,7 @@ if($_SESSION['role'] != 'admin'){
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-    <title>Panel administratora</title>
+    <title>PMS - Dodaj zlecenie</title>
 </head>
 <body>
 
@@ -32,27 +32,31 @@ if($_SESSION['role'] != 'admin'){
 
 <?php include 'views/menu.php'; ?>
 
-<div class="content">
-
-</div>
-
-<div class="main-content" id="completed-orders">
-<h2>Zakończone zlecenia</h2>
-    <form id="add-order">
+<div class="main-content" id="add-order">
+<h2>Dodaj zlecenie</h2>
+    <form id="add-order-form">
         <label for="order-number">Numer zlecenia </label>
             <input type="text" name="order-number" id="order-number" required>
 
         <label for="company">Firma </label>
             <input type="text" name="company" id="company" required>
 
+        <label for="detail">Detal </label>
+            <input type="text" name="detail" id="detail" required>
+            
+        <label for="quantity">Ilość </label>
+            <input type="number" min="1" name="quantity" id="quantity" required>
+
+        <label for="execution-date">Data wykonania </label>
+            <input type="date" name="execution-date" id="execution-date" required>
+
         <label for="issue-date">Data wystawienia </label>
-            <input type="date" name="issue-date" id="issue-date" value="<?php echo date('Y-m-d'); ?>" required>
+            <input type="date" name="issue-date" id="issue-date" value="<?php echo date('Y-m-d'); ?>" requireds>
 
         <button type="submit" id="submit-btn">Dodaj</button>
     </form>
 </div>
 
-</div>
 </div>
 
 </body>

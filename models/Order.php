@@ -26,7 +26,7 @@ class Order{
         $connection = $database->getConnection();
 
         $stmt = $connection->prepare("INSERT INTO orders (orderNumber, comapny, detail, quantity, issueDate, executionDate) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ss", $this->orderNumber, $this->company, $this->detail, $this->quantity, $this->issueDate, $this->excecutionDate);
+        $stmt->bind_param("sssi", $this->orderNumber, $this->company, $this->detail, $this->quantity, $this->issueDate, $this->excecutionDate);
         $stmt->execute();
 
         $this->id = $connection->insert_id;

@@ -10,16 +10,21 @@ $authController = new AuthController();
 switch($action){
     case 'dashboard-admin':
         $authController->dashboardAdmin();
-        
-        if(isset($_SESSION['add_user'])){
-            $authController->addUser();
-            unset($_SESSION['add_user']);
-            break;
-        }
-
         break;
     case 'dashboard-main':
         $authController->dashboardMain();
+        break;
+    case 'list-employee':
+        $authController->listEmployee();
+        break;
+    case 'add-order':
+        $authController->addOrder();
+        break;
+    case 'add-employee':
+        $authController->addEmployee();
+        break;
+    case 'list-order':
+        $authController->listOrder();
         break;
     default:
         $authController->login();

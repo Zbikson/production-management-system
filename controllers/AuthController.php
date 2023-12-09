@@ -10,6 +10,7 @@ class AuthController {
 
             // Weryfikacja użytkownika
             $user = User::getByUsername($username);
+            // $password = $user->verifyPassword($password);
 
             if ($user && $password) { //$user->verifyPassword($password)
                 // Logowanie udane
@@ -19,13 +20,9 @@ class AuthController {
                 $_SESSION['lastname'] = $user->getLastname();
                 $_SESSION['role'] = $user->getRole();
 
-                if($_SESSION['role'] != 'admin'){
-                    header("Location: index.php?action=dashboard-main");
-                    exit();
-                }else{
-                    header("Location: index.php?action=dashboard-admin");
-                    exit();
-                }
+                $redirectUrl = ($_SESSION['role'] != 'admin') ? 'dashboard-main' : 'dashboard-admin';
+                header("Location: index.php?action=$redirectUrl");
+                exit();
 
             } else {
                 // Logowanie nieudane
@@ -42,27 +39,55 @@ class AuthController {
 
     public function addUser() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_SESSION['add_user'];
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $name = $_POST['name'];
             $lastname = $_POST['lastname'];
             $role = $_POST['role'];
 
-            // Tworzenie nowego użytkownika
-            $newUser = new User($username, $password, $name, $lastname, $role);
-            $newUser->save();
-
-            // Rejestracja udana
-            // Przekierowanie lub wyświetlenie komunikatu sukcesu
-            $_SESSION['success_register'] = 'Dodano użytkownika!';
-            header('Location: index.php?action=dashboard-admin');
-            exit();
+            if (User::getByUsername($username)) {
+                $_SESSION['bad_username'] = 'Pracownik o takiej nazwie użytkownika już istnieje!';
+            }else{
+                // Tworzenie nowego użytkownika
+                $newUser = new User($username, $password, $name, $lastname, $role);
+                $newUser->save();
+                $_SESSION['success_register'] = 'Dodano pracownika!';
+                exit();
+            }            
         } else {
             // Wyświetlenie formularza rejestracji
             include 'views/login.php';
         }
     }
+
+    public function showUsers(){
+        $database = new Database();
+        $connection = $database->getConnection();
+
+        $query = "SELECT * FROM users";
+        $result = $connection->query($query);
+
+        if($result){
+            $users = $result->fetch_all(MYSQLI_ASSOC);
+            
+            foreach ($users as $i => $user) {
+                // echo '<a href="index.php?user='. $user['id'] . '">';
+                echo '<div class="">';
+                    echo ($i + 1)  . ' ';
+                    echo $user['username']  . ' ';
+                    echo $user['name']  . ' ';
+                    echo $user['password'] . ' ';
+                    echo $user['lastname'] . ' ';
+                    echo $user['role'] . ' ';
+                echo '</div>';
+                // echo '</a>';
+            }
+        }else {
+            // Obsłuż błąd zapytania
+            echo "Błąd zapytania: " . $connection->error;
+        }
+    }
+
 
     public function dashboardAdmin() {
         include 'views/dashboard-admin.php';
@@ -70,6 +95,22 @@ class AuthController {
 
     public function dashboardMain() {
         include 'views/dashboard-main.php';
+    }
+
+    public function listEmployee() {
+        include 'views/list-employee.php';
+    }
+
+    public function listOrder() {
+        include 'views/list-order.php';
+    }
+
+    public function addOrder() {
+        include 'views/add-order.php';
+    }
+
+    public function addEmployee() {
+        include 'views/add-employee.php';
     }
 
     public function logout(){

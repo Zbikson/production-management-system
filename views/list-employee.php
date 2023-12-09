@@ -24,36 +24,24 @@ if($_SESSION['role'] != 'admin'){
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-    <title>Panel administratora</title>
+    <title>PMS - Lista użytkowników</title>
 </head>
 <body>
 
 <div class="container">
-
+    
 <?php include 'views/menu.php'; ?>
 
-<div class="content">
-
-</div>
-
-<div class="main-content" id="completed-orders">
-<h2>Zakończone zlecenia</h2>
-    <form id="add-order">
-        <label for="order-number">Numer zlecenia </label>
-            <input type="text" name="order-number" id="order-number" required>
-
-        <label for="company">Firma </label>
-            <input type="text" name="company" id="company" required>
-
-        <label for="issue-date">Data wystawienia </label>
-            <input type="date" name="issue-date" id="issue-date" value="<?php echo date('Y-m-d'); ?>" required>
-
-        <button type="submit" id="submit-btn">Dodaj</button>
-    </form>
-</div>
-
-</div>
+    <div class="main-content" id="list-employee">
+    <h2>Lista użytkowników</h2>
+        <?php
+        $authController = new AuthController();
+        $authController->showUsers();
+        ?>
+    </div>
 </div>
 
 </body>
 </html>
+
+
