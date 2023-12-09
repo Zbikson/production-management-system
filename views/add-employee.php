@@ -44,7 +44,7 @@ if($_SESSION['role'] != 'admin'){
             unset($_SESSION['bad_username']);
         }
         ?>
-    <form id="add-employee-form"  method="post">
+    <form id="add-employee-form" action="?controller=AuthController&action=add-employee" method="post">
         <label for="username">Nazwa użytkownika </label>
             <input type="text" name="username" id="username" required>
 
@@ -59,9 +59,9 @@ if($_SESSION['role'] != 'admin'){
 
         <label for="role">Rola </label>
         <select id="role" name="role">
-                    <option value="employee">Pracownik</option>
-                    <option value="admin">Administrator</option>
-                </select>
+            <option value="employee">Pracownik</option>
+            <option value="admin">Administrator</option>
+        </select>
 
         <button type="submit" id="submit-btn">Dodaj</button>
     </form>

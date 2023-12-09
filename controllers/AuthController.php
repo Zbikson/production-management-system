@@ -47,10 +47,12 @@ class AuthController {
 
             if (User::getByUsername($username)) {
                 $_SESSION['bad_username'] = 'Pracownik o takiej nazwie użytkownika już istnieje!';
+                header('Location: index.php?action=add-employee');
             }else{
                 // Tworzenie nowego użytkownika
                 $newUser = new User($username, $password, $name, $lastname, $role);
                 $newUser->save();
+                header('Location: index.php?action=add-employee');
                 $_SESSION['success_register'] = 'Dodano pracownika!';
                 exit();
             }            
@@ -61,31 +63,29 @@ class AuthController {
     }
 
     public function showUsers(){
-        $database = new Database();
-        $connection = $database->getConnection();
+        // $database = new Database();
+        // $connection = $database->getConnection();
 
-        $query = "SELECT * FROM users";
-        $result = $connection->query($query);
+        // $query = "SELECT * FROM users";
+        // $result = $connection->query($query);
 
-        if($result){
-            $users = $result->fetch_all(MYSQLI_ASSOC);
+        // if($result){
+        //     $users = $result->fetch_all(MYSQLI_ASSOC);
             
-            foreach ($users as $i => $user) {
-                // echo '<a href="index.php?user='. $user['id'] . '">';
-                echo '<div class="">';
-                    echo ($i + 1)  . ' ';
-                    echo $user['username']  . ' ';
-                    echo $user['name']  . ' ';
-                    echo $user['password'] . ' ';
-                    echo $user['lastname'] . ' ';
-                    echo $user['role'] . ' ';
-                echo '</div>';
-                // echo '</a>';
-            }
-        }else {
-            // Obsłuż błąd zapytania
-            echo "Błąd zapytania: " . $connection->error;
-        }
+        //     foreach ($users as $i => $user) {
+        //         // echo '<a href="index.php?user='. $user['id'] . '">';
+        //             echo ($i + 1)  . ' ';
+        //             echo $user['username']  . ' ';
+        //             echo $user['name']  . ' ';
+        //             echo $user['password'] . ' ';
+        //             echo $user['lastname'] . ' ';
+        //             echo $user['role'] . ' ';
+        //         // echo '</a>';
+        //     }
+        // }else {
+        //     // Obsłuż błąd zapytania
+        //     echo "Błąd zapytania: " . $connection->error;
+        // }
     }
 
 
@@ -111,6 +111,10 @@ class AuthController {
 
     public function addEmployee() {
         include 'views/add-employee.php';
+    }
+
+    public function completedOrder() {
+        include 'views/completed-order.php';
     }
 
     public function logout(){

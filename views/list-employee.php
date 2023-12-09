@@ -20,9 +20,11 @@ if($_SESSION['role'] != 'admin'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/dashboard-style.css">
+    <link rel="stylesheet" type="text/css" href="bs/bootstrap/css/bootstrap-table.css">
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
     <title>PMS - Lista użytkowników</title>
 </head>
@@ -34,11 +36,57 @@ if($_SESSION['role'] != 'admin'){
 
     <div class="main-content" id="list-employee">
     <h2>Lista użytkowników</h2>
-        <?php
-        $authController = new AuthController();
-        $authController->showUsers();
-        ?>
+        
+        <div class="table table-striped">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Użytkownik</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Hasło</th>
+                    <th>Rola</th>
+                    <th>Edytuj</th>
+                    <th>Usuń</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $database = new Database();
+                $connection = $database->getConnection();
+
+                $query = "SELECT * FROM users";
+                $result = $connection->query($query);
+
+                if ($result) {
+                    $users = $result->fetch_all(MYSQLI_ASSOC);
+
+                    foreach ($users as $i => $user) {
+                        echo '<tr>';
+                        echo '<td>' . ($i + 1) . '</td>';
+                        echo '<td>' . $user['username'] . '</td>';
+                        echo '<td>' . $user['name'] . '</td>';
+                        echo '<td>' . $user['lastname'] . '</td>';
+                        echo '<td>' . '***' . '</td>';
+                        echo '<td>' . $user['role'] . '</td>';
+                        echo '<td><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></td>';
+                        echo '<td><button type="button" class="trash-btn"><i class="bi bi-trash3"></i></button></td>';
+                    }
+                } else {
+                    //błąd zapytania
+                    echo "Błąd zapytania: " . $connection->error;
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
+
+    </div>
+    
+
+
+
 </div>
 
 </body>

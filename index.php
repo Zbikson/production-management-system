@@ -22,9 +22,17 @@ switch($action){
         break;
     case 'add-employee':
         $authController->addEmployee();
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $authController->addUser();
+        }
+
         break;
     case 'list-order':
         $authController->listOrder();
+        break;
+    case 'completed-order':
+        $authController->completedOrder();
         break;
     default:
         $authController->login();

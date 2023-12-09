@@ -223,6 +223,41 @@ select{
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.edit-btn{
+    background-color: transparent;
+    color: #58a6ff;
+    border: 1px solid #58a6ff;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    padding: 2px 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.edit-btn:hover{
+    cursor: pointer;
+    background-color: #58a6ff;
+    border: 1px solid #58a6ff;
+    color: #f5f5f5;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.trash-btn{
+    background-color: transparent;
+    color: #c93232;
+    border: 1px solid #c93232;
+    border-radius: 5px;
+    padding: 2px 5px;
+    font-size: 1.3rem;
+}
+
+.trash-btn:hover{
+    cursor: pointer;
+    background-color: #c93232;
+    border: 1px solid #c93232;
+    color: #f5f5f5;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
 a:link {
     text-decoration: none;
     color: #fff;
