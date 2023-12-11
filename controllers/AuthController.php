@@ -62,30 +62,72 @@ class AuthController {
         }
     }
 
-    public function showUsers(){
-        // $database = new Database();
-        // $connection = $database->getConnection();
 
-        // $query = "SELECT * FROM users";
-        // $result = $connection->query($query);
+    public function deleteUser() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'delete-user' && isset($_GET['id'])) {
+            $id = $_GET['id'];
 
-        // if($result){
-        //     $users = $result->fetch_all(MYSQLI_ASSOC);
-            
-        //     foreach ($users as $i => $user) {
-        //         // echo '<a href="index.php?user='. $user['id'] . '">';
-        //             echo ($i + 1)  . ' ';
-        //             echo $user['username']  . ' ';
-        //             echo $user['name']  . ' ';
-        //             echo $user['password'] . ' ';
-        //             echo $user['lastname'] . ' ';
-        //             echo $user['role'] . ' ';
-        //         // echo '</a>';
-        //     }
-        // }else {
-        //     // Obsłuż błąd zapytania
-        //     echo "Błąd zapytania: " . $connection->error;
-        // }
+            if ($id == $_SESSION['user_id']) {
+                // Usuń sesję i przekieruj do strony wylogowania
+                session_destroy();
+                header("Location: index.php?action=logout");
+            }
+
+            if (User::deleteUser($id)) {
+                // Pomyślnie usunięto użytkownika
+                $_SESSION['success_delete'] = 'Usunięto pracownika!';
+                
+            } else {
+                // Obsłuż błąd usuwania
+                $_SESSION['error_delete'] = 'Błąd usuwania użytkownika';
+            }
+
+            header("Location: index.php?action=list-employee");
+            exit();
+        }
+    }
+
+    public function editEmployee() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+            $userId = $_GET['id'];
+            // Pobierz dane użytkownika do edycji
+            $user = User::getUserById($userId);
+
+            if (!$user) {
+                // Obsłuż przypadki, gdy użytkownik o danym ID nie istnieje
+                $_SESSION['error_edit'] = 'Nie znaleziono użytkownika do edycji.';
+                header("Location: index.php?action=list-employee");
+                exit();
+            }
+
+            // Wyświetl formularz edycji z wypełnionymi danymi użytkownika
+            include 'views/edit-employee.php';
+        } else {
+            // Przekieruj na stronę z listą użytkowników lub inny widok
+            header("Location: index.php?action=list-employee");
+            exit();
+        }
+    }
+
+    public function updateEmployee() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $userId = $_POST['id'];
+            $newUsername = $_POST['username'];
+            $newName = $_POST['name'];
+            $newLastname = $_POST['lastname'];
+            $newPassword = $_POST['password'];
+
+            // Wywołaj funkcję do aktualizacji danych użytkownika
+            if (User::updateUser($userId, $newUsername, $newName, $newLastname, $newPassword)) {
+                $_SESSION['success_edit'] = 'Zaktualizowano dane użytkownika.';
+            } else {
+                $_SESSION['error_edit'] = 'Błąd podczas aktualizacji danych użytkownika.';
+            }
+        }
+
+        // Przekieruj na stronę z listą użytkowników lub inny widok
+        header("Location: index.php?action=list-employee");
+        exit();
     }
 
 

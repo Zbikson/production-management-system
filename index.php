@@ -22,11 +22,15 @@ switch($action){
         break;
     case 'add-employee':
         $authController->addEmployee();
-        
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $authController->addUser();
-        }
-
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $authController->addUser();
+            }
+        break;
+    case 'delete-user':
+        $authController->deleteUser();
+        break;
+    case 'edit-employee':
+        $authController->editEmployee();
         break;
     case 'list-order':
         $authController->listOrder();

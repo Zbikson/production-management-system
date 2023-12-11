@@ -54,6 +54,17 @@
     color: #212529;
     background-color: rgba(0, 0, 0, 0.075);
     }
+
+    /* Kolor tabeli po najechaniu hover */
+
+    .table.table-striped tbody tr:hover {
+        background-color: #d8d8d8;
+    }
+
+    .table.table-striped tbody{
+        border: 1px solid #212529;
+    }
+
     
     .table-primary,
     .table-primary > th,
@@ -235,15 +246,18 @@
     .table-active > th,
     .table-active > td {
     background-color: rgba(0, 0, 0, 0.075);
+ 
     }
     
     .table-hover .table-active:hover {
     background-color: rgba(0, 0, 0, 0.075);
+   
     }
     
     .table-hover .table-active:hover > td,
     .table-hover .table-active:hover > th {
     background-color: rgba(0, 0, 0, 0.075);
+
     }
     
     .table .thead-dark th {

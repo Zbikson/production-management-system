@@ -55,6 +55,61 @@ class User{
         }
     }
 
+    public static function deleteUser($id) {
+        $database = new Database();
+        $connection = $database->getConnection();
+
+        $query = "DELETE FROM users WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            return true;
+        } else {
+            // Logowanie błędu do pliku lub innego systemu logów
+            error_log("Błąd usuwania użytkownika: " . $stmt->error);
+            
+            $stmt->close();
+            return false;
+        }
+    }
+
+    public static function getUserById($id) {
+        $database = new Database();
+        $connection = $database->getConnection();
+
+        $query = "SELECT * FROM users WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        $stmt->close();
+
+        return $user;
+    }
+
+    // W pliku User.php w models
+    public static function updateUser($id, $newUsername, $newName, $newLastname, $newPassword) {
+        $database = new Database();
+        $connection = $database->getConnection();
+
+        $query = "UPDATE users SET username = ?, name = ?, lastname = ?, password = ? WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("ssssi", $newUsername, $newName, $newLastname, $newPassword, $id);
+
+        $success = $stmt->execute();
+
+        $stmt->close();
+
+        return $success;
+    }
+
+
+
     public function verifyPassword($password) {
         return password_verify($password, $this->password);
     }

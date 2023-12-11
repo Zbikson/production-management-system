@@ -36,6 +36,13 @@ if($_SESSION['role'] != 'admin'){
 
     <div class="main-content" id="list-employee">
     <h2>Lista użytkowników</h2>
+
+    <?php
+        if(isset($_SESSION['success_delete'])){
+            echo "<div class='success'>" . $_SESSION['success_delete'] . "</div>" ; 
+            unset($_SESSION['success_delete']);
+        }
+    ?>
         
         <div class="table table-striped">
         <table class="table">
@@ -70,8 +77,9 @@ if($_SESSION['role'] != 'admin'){
                         echo '<td>' . $user['lastname'] . '</td>';
                         echo '<td>' . '***' . '</td>';
                         echo '<td>' . $user['role'] . '</td>';
-                        echo '<td><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></td>';
-                        echo '<td><button type="button" class="trash-btn"><i class="bi bi-trash3"></i></button></td>';
+                        echo '<td><a href="?action=edit-employee&id=' . $user['id'] . '"><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></a></td>';
+                        echo '<td><a href="?action=delete-user&id=' . $user['id'] . ' " onclick="return confirm(\'Czy na pewno chcesz usunąć tego użytkownika?\' );"><button type="button" class="trash-btn" ><i class="bi bi-trash3"></i></button></a></td>';
+
                     }
                 } else {
                     //błąd zapytania
@@ -84,7 +92,16 @@ if($_SESSION['role'] != 'admin'){
 
     </div>
     
+    <script>
+        function confirmDelete(userId) {
+            var confirmation = confirm('Czy na pewno chcesz usunąć tego użytkownika?');
 
+            if (confirmation) {
+                // Przekieruj do odpowiedniej ścieżki usuwania
+                window.location.href = 'index.php?action=delete-user&id=' + userId;
+            }
+        }
+    </script>
 
 
 </div>
