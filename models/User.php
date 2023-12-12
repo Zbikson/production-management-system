@@ -93,13 +93,15 @@ class User{
     }
 
     // W pliku User.php w models
-    public static function updateUser($id, $newUsername, $newName, $newLastname, $newPassword) {
+    public static function updateUser($id, $newUsername, $newName, $newLastname, $newPassword, $role) {
         $database = new Database();
         $connection = $database->getConnection();
 
-        $query = "UPDATE users SET username = ?, name = ?, lastname = ?, password = ? WHERE id = ?";
+        $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $query = "UPDATE users SET username = ?, name = ?, lastname = ?, password = ?, role = ? WHERE id = ?";
         $stmt = $connection->prepare($query);
-        $stmt->bind_param("ssssi", $newUsername, $newName, $newLastname, $newPassword, $id);
+        $stmt->bind_param("sssssi", $newUsername, $newName, $newLastname, $newHashedPassword, $role, $id);
 
         $success = $stmt->execute();
 
@@ -108,11 +110,6 @@ class User{
         return $success;
     }
 
-
-
-    public function verifyPassword($password) {
-        return password_verify($password, $this->password);
-    }
 
     // Pobieranie ID użytkownika
     public function getId() { 
@@ -132,6 +129,10 @@ class User{
 
     public function getRole() { 
         return $this->role;
+    }
+
+    public function getPassword() { 
+        return $this->password;
     }
 
 }

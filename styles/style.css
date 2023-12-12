@@ -10,13 +10,17 @@ body{
 }
 
 .error{
-    color: #dd0404;
+    color: #fff;
     margin-top: 5px;
+    padding: 10px;
+    background-color: #dd0404ab;
 }
 
 .success{
-    color: #32c941;
+    color: #fff;
     margin-top: 5px;
+    padding: 10px;
+    background-color: #269631b2;
 }
 
 a:link {

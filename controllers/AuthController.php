@@ -10,9 +10,8 @@ class AuthController {
 
             // Weryfikacja użytkownika
             $user = User::getByUsername($username);
-            // $password = $user->verifyPassword($password);
 
-            if ($user && $password) { //$user->verifyPassword($password)
+            if ($user && password_verify($password, $user->getPassword())) {
                 // Logowanie udane
                 $_SESSION['user_id'] = $user->getId(); // Zapisujemy ID użytkownika w sesji
                 $_SESSION['username'] = $user->getUsername();
@@ -116,12 +115,13 @@ class AuthController {
             $newName = $_POST['name'];
             $newLastname = $_POST['lastname'];
             $newPassword = $_POST['password'];
+            $newRole = $_POST['role'];
 
             // Wywołaj funkcję do aktualizacji danych użytkownika
-            if (User::updateUser($userId, $newUsername, $newName, $newLastname, $newPassword)) {
-                $_SESSION['success_edit'] = 'Zaktualizowano dane użytkownika.';
+            if (User::updateUser($userId, $newUsername, $newName, $newLastname, $newPassword, $newRole)) {
+                $_SESSION['success_edit'] = 'Zaktualizowano dane użytkownika!';
             } else {
-                $_SESSION['error_edit'] = 'Błąd podczas aktualizacji danych użytkownika.';
+                $_SESSION['error_edit'] = 'Błąd podczas aktualizacji danych użytkownika!';
             }
         }
 

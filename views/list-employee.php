@@ -24,7 +24,6 @@ if($_SESSION['role'] != 'admin'){
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
     <title>PMS - Lista użytkowników</title>
 </head>
@@ -35,12 +34,20 @@ if($_SESSION['role'] != 'admin'){
 <?php include 'views/menu.php'; ?>
 
     <div class="main-content" id="list-employee">
-    <h2>Lista użytkowników</h2>
+    <h2>Lista pracowników</h2>
 
     <?php
         if(isset($_SESSION['success_delete'])){
             echo "<div class='success'>" . $_SESSION['success_delete'] . "</div>" ; 
             unset($_SESSION['success_delete']);
+        }
+        if(isset($_SESSION['success_edit'] )){
+            echo "<div class='success'>" . $_SESSION['success_edit']  . "</div>" ; 
+            unset($_SESSION['success_edit'] );
+        }
+        if(isset($_SESSION['error_edit'] )){
+            echo "<div class='error'>" . $_SESSION['error_edit']  . "</div>" ; 
+            unset($_SESSION['error_edit'] );
         }
     ?>
         

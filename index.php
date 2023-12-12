@@ -32,6 +32,9 @@ switch($action){
     case 'edit-employee':
         $authController->editEmployee();
         break;
+    case 'update-employee':
+        $authController->updateEmployee();
+        break;
     case 'list-order':
         $authController->listOrder();
         break;
