@@ -20,6 +20,7 @@ if($_SESSION['role'] != 'admin'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/dashboard-style.css">
+    <link rel="stylesheet" type="text/css" href="bs/bootstrap/css/bootstrap-table.css">
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -33,32 +34,61 @@ if($_SESSION['role'] != 'admin'){
 <?php include 'views/menu.php'; ?>
 
 <div class="main-content" id="list-order">
-    <div id="search-bar">
+    <!-- <div id="search-bar">
         <form action="">
             <input type="text" placeholder="Wyszukaj...">
             <button type="submit"><i class="bi bi-search"></i></button>
         </form>
-    </div>
-    <div id="table">
-    <table>
-        <thead>
-            <tr>
-                <th>Lp.</th><th>Numer zlecenia</th><th>Firma</th><th>Detal</th><th>Ilość</th><th>Data wykonania</th><th>Data wystawienia</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td><td>Z0001</td><td>Firma A</td><td>NC0001</td><td>10</td><td>2023-01-01</td><td>2023-01-05</td>
-            </tr>
-            <tr>
-                <td>2</td><td>Z0002</td><td>Firma B</td><td>NC0002</td><td>15</td><td>2023-02-10</td><td>2023-02-15</td>
-            </tr>
-        </tbody>
-    </table>
+    </div> -->
+    <h2>Lista zleceń</h2>
+        
+        <div class="table table-striped">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Numer zlecenia</th>
+                    <th>Kontrahent</th>
+                    <th>Detal</th>
+                    <th>Ilość</th>
+                    <th>Data wystawienia</th>
+                    <th>Data Wykonania</th>
+                    <th>Edytuj</th>
+                    <th>Usuń</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $database = new Database();
+                $connection = $database->getConnection();
 
-    </div>
-</div>
+                $query = "SELECT * FROM orders";
+                $result = $connection->query($query);
 
+                if ($result) {
+                    $orders = $result->fetch_all(MYSQLI_ASSOC);
+
+                    foreach ($orders as $i => $order) {
+                        echo '<tr>';
+                        echo '<td>' . ($i + 1) . '</td>';
+                        echo '<td>' . $order['orderNumber'] . '</td>';
+                        echo '<td>' . $order['company'] . '</td>';
+                        echo '<td>' . $order['detail'] . '</td>';
+                        echo '<td>' . $order['quantity'] . '</td>';
+                        echo '<td>' . $order['issueDate'] . '</td>';
+                        echo '<td>' . $order['executionDate'] . '</td>';
+                        echo '<td><a href="?action=edit-order&id=' . $order['id'] . '"><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></a></td>';
+                        echo '<td><a href="?action=delete-order&id=' . $order['id'] . ' " onclick="return confirm(\'Czy na pewno chcesz usunąć tego użytkownika?\' );"><button type="button" class="trash-btn" ><i class="bi bi-trash3"></i></button></a></td>';
+
+                    }
+                } else {
+                    //błąd zapytania
+                    echo "Błąd zapytania: " . $connection->error;
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

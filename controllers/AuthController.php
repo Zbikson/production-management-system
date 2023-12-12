@@ -143,20 +143,8 @@ class AuthController {
         include 'views/list-employee.php';
     }
 
-    public function listOrder() {
-        include 'views/list-order.php';
-    }
-
-    public function addOrder() {
-        include 'views/add-order.php';
-    }
-
     public function addEmployee() {
         include 'views/add-employee.php';
-    }
-
-    public function completedOrder() {
-        include 'views/completed-order.php';
     }
 
     public function logout(){

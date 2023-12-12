@@ -2,10 +2,12 @@
 session_start();
 
 require_once 'controllers/AuthController.php';
+require_once 'controllers/OrderController.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
 $authController = new AuthController();
+$orderController = new OrderController();
 
 switch($action){
     case 'dashboard-admin':
@@ -16,9 +18,6 @@ switch($action){
         break;
     case 'list-employee':
         $authController->listEmployee();
-        break;
-    case 'add-order':
-        $authController->addOrder();
         break;
     case 'add-employee':
         $authController->addEmployee();
@@ -35,12 +34,23 @@ switch($action){
     case 'update-employee':
         $authController->updateEmployee();
         break;
-    case 'list-order':
-        $authController->listOrder();
+
+
+    // OrderController
+    case 'add':
+        $orderController->addOrder();
         break;
     case 'completed-order':
-        $authController->completedOrder();
+        $orderController->completedOrderView();
         break;
+    case 'list-order':
+        $orderController->listOrderView();
+        break;
+    case 'add-order':
+        $orderController->addOrderView();
+        break;
+
+    // Default
     default:
         $authController->login();
         break;

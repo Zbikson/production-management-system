@@ -34,7 +34,14 @@ if($_SESSION['role'] != 'admin'){
 
 <div class="main-content" id="add-order">
 <h2>Dodaj zlecenie</h2>
-    <form id="add-order-form">
+
+    <?php 
+        if(isset($_SESSION['success_add_order'])){
+            echo "<div class='success'>" . $_SESSION['success_add_order'] . "</div>";
+            unset($_SESSION['success_add_order']);
+        }
+    ?>
+    <form id="add-order-form" action="?controller=OrderController&action=add" method="post">
         <label for="order-number">Numer zlecenia </label>
             <input type="text" name="order-number" id="order-number" required>
 
@@ -47,11 +54,11 @@ if($_SESSION['role'] != 'admin'){
         <label for="quantity">Ilość </label>
             <input type="number" min="1" name="quantity" id="quantity" required>
 
+        <label for="issue-date">Data wystawienia </label>
+            <input type="date" name="issue-date" id="issue-date" required>
+
         <label for="execution-date">Data wykonania </label>
             <input type="date" name="execution-date" id="execution-date" required>
-
-        <label for="issue-date">Data wystawienia </label>
-            <input type="date" name="issue-date" id="issue-date" value="<?php echo date('Y-m-d'); ?>" requireds>
 
         <button type="submit" id="submit-btn">Dodaj</button>
     </form>

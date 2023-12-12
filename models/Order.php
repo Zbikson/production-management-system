@@ -17,7 +17,7 @@ class Order{
         $this->company = $company;
         $this->detail= $detail;
         $this->quantity = $quantity;
-        $this->$issueDate = $issueDate;
+        $this->issueDate = $issueDate;
         $this->excecutionDate = $excecutionDate;
     }
 
@@ -25,8 +25,8 @@ class Order{
         $database = new Database();
         $connection = $database->getConnection();
 
-        $stmt = $connection->prepare("INSERT INTO orders (orderNumber, comapny, detail, quantity, issueDate, executionDate) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssi", $this->orderNumber, $this->company, $this->detail, $this->quantity, $this->issueDate, $this->excecutionDate);
+        $stmt = $connection->prepare("INSERT INTO orders (orderNumber, company, detail, quantity, issueDate, executionDate) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssiss", $this->orderNumber, $this->company, $this->detail, $this->quantity, $this->issueDate, $this->excecutionDate);
         $stmt->execute();
 
         $this->id = $connection->insert_id;
