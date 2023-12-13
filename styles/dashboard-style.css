@@ -290,43 +290,13 @@ a:active {
 
 /* dashboard-main style */
 
-.main-dashboard{
-    width: 90%;
-    /* display: flex;
-    flex-direction: column; */
-    justify-content: center;
-    margin: 20px;
-    padding: 20px;
-}
 
-.main-dashboard #header-main-content{
-    margin-top: 30px;
+.main-content #search-bar{
     width: 100%;
-    display: flex;
-    flex-direction: row;
+    max-width: 1200px;
+    margin-bottom: 20px;
 }
-.main-dashboard #job-buttons{
-    margin-top: 20px;
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.main-dashboard #job-buttons button{
-    font-size: 1.1rem;
-    margin-right: 20px;
-    width: 200px;
-    min-width: 200px;
-    height: 40px;
-}
-
-.main-dashboard #search-bar{
-    width: 70%;
-    display: flex;
-    flex-direction: row-reverse;
-}
-.main-dashboard #search-bar form{
+.main-content #search-bar form{
     margin-top: 20px;
     justify-content: center;
     align-items: center;
@@ -338,13 +308,13 @@ a:active {
     background-color: #fff;
 }
 
-.main-dashboard #search-bar form input{
+.main-content #search-bar form input{
     width: 90%;
     background-color: transparent;
     border: none;
     margin-left: 5px;
 }
-.main-dashboard #search-bar button{
+.main-content #search-bar button{
     margin: 5px;
     background-color: transparent;
     border: none;
@@ -352,23 +322,12 @@ a:active {
     font-size: 1.3rem;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
-.main-dashboard #search-bar button:hover{
+.main-content #search-bar button:hover{
     color: #58a6ff;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.main-dashboard #search-bar form input:focus{
+.main-content #search-bar form input:focus{
     outline: none;
 }
 
-.main-dashboard #table{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    text-align: center;
-    border: 1px solid #42445A;
-}
-
-.main-dashboard #table td{
-    margin: 10px;
-}

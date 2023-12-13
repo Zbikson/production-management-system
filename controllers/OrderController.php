@@ -21,6 +21,64 @@ class OrderController{
         }
     }
 
+    public function deleteOrder() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'delete-order' && isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            if (Order::delete($id)) {
+                // Pomyślnie usunięto użytkownika
+                $_SESSION['success_delete_order'] = 'Usunięto zlecenie!';
+                
+            } else {
+                // Obsłuż błąd usuwania
+                $_SESSION['error_delete_order'] = 'Błąd usuwania zlecenia';
+            }
+
+            header("Location: index.php?action=list-order");
+            exit();
+        }
+    }
+
+    public function editOrder() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+            $orderId = $_GET['id'];
+            // Pobierz dane użytkownika do edycji
+            $order = Order::getOrderById($orderId);
+
+            if (!$order) {
+                // Obsłuż przypadki, gdy zlecenie o danym ID nie istnieje
+                $_SESSION['error_edit'] = 'Nie znaleziono zlecenia do edycji.';
+                header("Location: index.php?action=list-order");
+                exit();
+            }
+            include 'views/edit-order.php';
+        } else {
+            header("Location: index.php?action=list-order");
+            exit();
+        }
+    }
+
+    public function updateOrder() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $orderId = $_POST['id'];
+            $newOrderNumber = $_POST['orderNumber'];
+            $newCompany = $_POST['company'];
+            $newDetail = $_POST['detail'];
+            $newQuantity = $_POST['quantity'];
+            $newIssueDate = $_POST['issueDate'];
+            $newExecutionDate = $_POST['executionDate'];
+
+            // Wywołaj funkcję do aktualizacji danych zlecenia
+            if (Order::update($orderId, $newOrderNumber, $newCompany, $newDetail, $newQuantity, $newIssueDate, $newExecutionDate)) {
+                $_SESSION['success_edit_order'] = 'Zaktualizowano zlecenie!';
+            } else {
+                $_SESSION['error_edit_order'] = 'Błąd podczas aktualizacji danych zlecenia!';
+            }
+        }
+        header("Location: index.php?action=list-order");
+        exit();
+    }
+
 public function completedOrderView() {
     include 'views/completed-order.php';
 }

@@ -25,20 +25,20 @@ if($_SESSION['role'] != 'admin'){
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-    <title>PMS - Lista użytkowników</title>
+    <title>PMS - Lista pracowników</title>
 </head>
 <body>
 
 <div class="container">
     
-<?php include 'views/menu.php'; ?>
+<?php include 'views/menu-admin.php'; ?>
 
     <div class="main-content" id="list-employee">
     <h2>Lista pracowników</h2>
 
     <?php
         if(isset($_SESSION['success_delete'])){
-            echo "<div class='success'>" . $_SESSION['success_delete'] . "</div>" ; 
+            echo "<div class='error'>" . $_SESSION['success_delete'] . "</div>" ; 
             unset($_SESSION['success_delete']);
         }
         if(isset($_SESSION['success_edit'] )){

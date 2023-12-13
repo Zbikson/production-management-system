@@ -13,7 +13,7 @@ if(!isset($_SESSION)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/login-style.css">
-    <title>Login</title>
+    <title>PMS - Logowanie</title>
 </head>
 <body>
     <div class="container">
@@ -22,9 +22,9 @@ if(!isset($_SESSION)){
         </div>
 
         <form class="basic-form" method="post">
-            <label>Nazwa użytkownika</label>
+            <label for="username">Nazwa użytkownika</label>
             <input type="text" name="username" id="username" required>
-            <label>Hasło</label>
+            <label for="password">Hasło</label>
             <input type="password" name="password" id="password" required>
             <button type="submit">Zaloguj</button>
             <?php

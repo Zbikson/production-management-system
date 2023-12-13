@@ -30,7 +30,7 @@ if($_SESSION['role'] != 'admin'){
 
 <div class="container">
 
-<?php include 'views/menu.php'; ?>
+<?php include 'views/menu-admin.php'; ?>
 
 <div class="content">
 

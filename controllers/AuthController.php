@@ -61,7 +61,6 @@ class AuthController {
         }
     }
 
-
     public function deleteUser() {
         if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'delete-user' && isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -94,7 +93,7 @@ class AuthController {
 
             if (!$user) {
                 // Obsłuż przypadki, gdy użytkownik o danym ID nie istnieje
-                $_SESSION['error_edit'] = 'Nie znaleziono użytkownika do edycji.';
+                $_SESSION['error_edit'] = 'Nie znaleziono pracownika do edycji.';
                 header("Location: index.php?action=list-employee");
                 exit();
             }
@@ -102,7 +101,6 @@ class AuthController {
             // Wyświetl formularz edycji z wypełnionymi danymi użytkownika
             include 'views/edit-employee.php';
         } else {
-            // Przekieruj na stronę z listą użytkowników lub inny widok
             header("Location: index.php?action=list-employee");
             exit();
         }
@@ -119,9 +117,9 @@ class AuthController {
 
             // Wywołaj funkcję do aktualizacji danych użytkownika
             if (User::updateUser($userId, $newUsername, $newName, $newLastname, $newPassword, $newRole)) {
-                $_SESSION['success_edit'] = 'Zaktualizowano dane użytkownika!';
+                $_SESSION['success_edit'] = 'Zaktualizowano dane pracownika!';
             } else {
-                $_SESSION['error_edit'] = 'Błąd podczas aktualizacji danych użytkownika!';
+                $_SESSION['error_edit'] = 'Błąd podczas aktualizacji danych pracownika!';
             }
         }
 

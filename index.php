@@ -49,7 +49,15 @@ switch($action){
     case 'add-order':
         $orderController->addOrderView();
         break;
-
+    case 'delete-order':
+        $orderController->deleteOrder();
+        break;
+    case 'edit-order':
+        $orderController->editOrder();
+        break;
+    case 'update-order':
+        $orderController->updateOrder();
+        break;
     // Default
     default:
         $authController->login();

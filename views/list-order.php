@@ -25,13 +25,13 @@ if($_SESSION['role'] != 'admin'){
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-    <title>PMS - Dodaj zlecenie</title>
+    <title>PMS - Lista zleceń</title>
 </head>
 <body>
 
 <div class="container">
 
-<?php include 'views/menu.php'; ?>
+<?php include 'views/menu-admin.php'; ?>
 
 <div class="main-content" id="list-order">
     <!-- <div id="search-bar">
@@ -41,6 +41,21 @@ if($_SESSION['role'] != 'admin'){
         </form>
     </div> -->
     <h2>Lista zleceń</h2>
+
+    <?php
+        if(isset($_SESSION['success_delete_order'])){
+            echo "<div class='error'>" . $_SESSION['success_delete_order'] . "</div>" ; 
+            unset($_SESSION['success_delete_order']);
+        }
+        if(isset($_SESSION['success_edit_order'] )){
+            echo "<div class='success'>" . $_SESSION['success_edit_order']  . "</div>" ; 
+            unset($_SESSION['success_edit_order'] );
+        }
+        if(isset($_SESSION['error_edit_order'] )){
+            echo "<div class='error'>" . $_SESSION['error_edit_order']  . "</div>" ; 
+            unset($_SESSION['error_edit_order'] );
+        }
+    ?>
         
         <div class="table table-striped">
         <table class="table">
@@ -78,7 +93,7 @@ if($_SESSION['role'] != 'admin'){
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
                         echo '<td><a href="?action=edit-order&id=' . $order['id'] . '"><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></a></td>';
-                        echo '<td><a href="?action=delete-order&id=' . $order['id'] . ' " onclick="return confirm(\'Czy na pewno chcesz usunąć tego użytkownika?\' );"><button type="button" class="trash-btn" ><i class="bi bi-trash3"></i></button></a></td>';
+                        echo '<td><a href="?action=delete-order&id=' . $order['id'] . ' " onclick="return confirm(\'Czy na pewno chcesz usunąć to zlecenie?\' );"><button type="button" class="trash-btn" ><i class="bi bi-trash3"></i></button></a></td>';
 
                     }
                 } else {
@@ -89,6 +104,17 @@ if($_SESSION['role'] != 'admin'){
             </tbody>
         </table>
     </div>
+
+    <script>
+        function confirmDelete(userId) {
+            var confirmation = confirm('Czy na pewno chcesz usunąć tego użytkownika?');
+
+            if (confirmation) {
+                // Przekieruj do odpowiedniej ścieżki usuwania
+                window.location.href = 'index.php?action=delete-user&id=' + userId;
+            }
+        }
+    </script>
 </div>
 
 </body>

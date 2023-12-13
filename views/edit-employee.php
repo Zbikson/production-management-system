@@ -28,13 +28,13 @@ if($_SESSION['role'] != 'admin'){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 
-    <title>PMS - Lista użytkowników</title>
+    <title>PMS - Edycja użytkownika</title>
 </head>
 <body>
 
 <div class="container">
     
-<?php include 'views/menu.php'; ?>
+<?php include 'views/menu-admin.php'; ?>
 
     <div class="main-content" >
     <h2>Edycja użytkownika</h2>
@@ -47,7 +47,7 @@ if($_SESSION['role'] != 'admin'){
 
             <label for="password">Hasło:</label>
             <input type="checkbox" title="Aktywacja/deaktywacja edycji hasła" id="passwordCheckbox" onclick="toggleInput()">
-            <input type="password" id="password" name="password" disabled required>
+            <input type="password" id="password" name="password" value="<?php echo $user['password']; ?>" disabled required>
 
             <label for="name">Imię:</label>
             <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required>

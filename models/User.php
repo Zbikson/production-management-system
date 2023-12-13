@@ -91,9 +91,8 @@ class User{
 
         return $user;
     }
-
-    // W pliku User.php w models
-    public static function updateUser($id, $newUsername, $newName, $newLastname, $newPassword, $role) {
+    
+    public static function updateUser($id, $newUsername, $newName, $newLastname, $newPassword, $newRole) {
         $database = new Database();
         $connection = $database->getConnection();
 
@@ -101,7 +100,7 @@ class User{
 
         $query = "UPDATE users SET username = ?, name = ?, lastname = ?, password = ?, role = ? WHERE id = ?";
         $stmt = $connection->prepare($query);
-        $stmt->bind_param("sssssi", $newUsername, $newName, $newLastname, $newHashedPassword, $role, $id);
+        $stmt->bind_param("sssssi", $newUsername, $newName, $newLastname, $newHashedPassword, $newRole, $id);
 
         $success = $stmt->execute();
 

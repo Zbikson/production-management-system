@@ -16,6 +16,7 @@ if(!isset($_SESSION['user_id'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/dashboard-style.css">
+    <link rel="stylesheet" type="text/css" href="bs/bootstrap/css/bootstrap-table.css">
     
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -25,81 +26,73 @@ if(!isset($_SESSION['user_id'])){
 
 <div class="container">
 
-    <div class="sidebar">
-        <h1>PMS</h1>
+<?php include 'views/menu-main.php'; ?>
 
-        <ol>
-            <li><i class="bi bi-collection"></i> Zlecenia</li>
-                <ul>
-                    <a href=""><li>Wszystkie</li></a>
-                    <li>W realizacji</li>
-                </ul>
-        </ol>
-
-    </div>
-
-
-<div class="content">
-
-<div class="header">
-    <div class="title">Panel zleceń</div>
-
-    <div class="data">
-        <?php
-        if(isset($_SESSION['username']) && isset($_SESSION['name']) && isset($_SESSION['lastname'])){
-            echo "Użytkownik: " . $_SESSION['username'] . " • ";
-            echo "Imię: " . $_SESSION['name'] . " • ";
-            echo "Nazwisko: " . $_SESSION['lastname'] . "<br>";
-            echo "Data: ". date('d/m/Y'); 
-            echo " Godzina: ". date(' H:i');
-        }
-        ?>
-    </div>
-
-    <div class="control-panel">
-        <?php
-        if($_SESSION['role'] == 'admin'){
-            echo '<a id="panel-btn" href="index.php?action=dashboard-admin" title="Panel zleceń"><i class="bi bi-terminal"></i>Panel administratora</a>';
-        } else{
-            echo '<a id="panel-disable" href="index.php?action=dashboard-admin" title="Panel zleceń">Panel administratora</a>';
-        }
-        ?>
-        
-        <a id="logout-btn" href="index.php?action=logout" title="Wyloguj"><i class="bi bi-box-arrow-right"></i>Wyloguj</a>
-    </div>
-</div>
-
-<div class="main-dashboard">
-    <div id="header-main-content">
-        <div id="job-buttons">
-            <button type="" id="start-job-btn">Rozpocznij czas pracy</button>
-            <button type="" id="end-job-btn">Zakończ czas pracy</button>
-        </div>
+<div class="main-content" id="main-dashboard">
         <div id="search-bar">
             <form action="">
                 <input type="text" placeholder="Wyszukaj...">
                 <button type="submit"><i class="bi bi-search"></i></button>
             </form>
-    </div>
-    </div>
-    <div id="table">
-    <table>
-        <thead>
-            <tr>
-                <th>Lp.</th><th>Numer zlecenia</th><th>Firma</th><th>Detal</th><th>Ilość</th><th>Data wykonania</th><th>Data wystawienia</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td><td>Z0001</td><td>Firma A</td><td>NC0001</td><td>10</td><td>2023-01-01</td><td>2023-01-05</td>
-            </tr>
-            <tr>
-                <td>2</td><td>Z0002</td><td>Firma B</td><td>NC0002</td><td>15</td><td>2023-02-10</td><td>2023-02-15</td>
-            </tr>
-        </tbody>
-    </table>
 
+            <?php
+        if(isset($_SESSION['success_delete_order'])){
+            echo "<div class='error'>" . $_SESSION['success_delete_order'] . "</div>" ; 
+            unset($_SESSION['success_delete_order']);
+        }
+        if(isset($_SESSION['success_edit_order'] )){
+            echo "<div class='success'>" . $_SESSION['success_edit_order']  . "</div>" ; 
+            unset($_SESSION['success_edit_order'] );
+        }
+        if(isset($_SESSION['error_edit_order'] )){
+            echo "<div class='error'>" . $_SESSION['error_edit_order']  . "</div>" ; 
+            unset($_SESSION['error_edit_order'] );
+        }
+    ?>
+        
+        <div class="table table-striped">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Numer zlecenia</th>
+                    <th>Kontrahent</th>
+                    <th>Detal</th>
+                    <th>Ilość</th>
+                    <th>Data wystawienia</th>
+                    <th>Data Wykonania</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $database = new Database();
+                $connection = $database->getConnection();
+
+                $query = "SELECT * FROM orders";
+                $result = $connection->query($query);
+
+                if ($result) {
+                    $orders = $result->fetch_all(MYSQLI_ASSOC);
+
+                    foreach ($orders as $i => $order) {
+                        echo '<tr>';
+                        echo '<td>' . ($i + 1) . '</td>';
+                        echo '<td>' . $order['orderNumber'] . '</td>';
+                        echo '<td>' . $order['company'] . '</td>';
+                        echo '<td>' . $order['detail'] . '</td>';
+                        echo '<td>' . $order['quantity'] . '</td>';
+                        echo '<td>' . $order['issueDate'] . '</td>';
+                        echo '<td>' . $order['executionDate'] . '</td>';
+                    }
+                } else {
+                    //błąd zapytania
+                    echo "Błąd zapytania: " . $connection->error;
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
+        
 </div>
 </div>
 </div>
