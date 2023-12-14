@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../includes/Database.php';
+require_once __DIR__ . '/../models/Database.php';
 
 class User{
 
@@ -129,7 +129,6 @@ class User{
     public function getRole() { 
         return $this->role;
     }
-
     public function getPassword() { 
         return $this->password;
     }

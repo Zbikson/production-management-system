@@ -80,7 +80,7 @@ if(!isset($_SESSION['user_id'])){
                         echo '<td>' . $order['orderNumber'] . '</td>';
                         echo '<td>' . $order['company'] . '</td>';
                         echo '<td>' . $order['detail'] . '</td>';
-                        echo '<td>' . $order['quantity'] . '</td>';
+                        echo '<td>/' . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
                     }

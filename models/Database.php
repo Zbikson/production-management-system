@@ -26,7 +26,7 @@ class Database {
     public function closeConnection() {
         if ($this->conn && $this->conn->ping()) {
             $this->conn->close();
-            $this->conn = null; // Ustaw połączenie na null, aby uniknąć przypadkowego ponownego zamknięcia
+            $this->conn = null; // Ustawienie połączenie na null, aby uniknąć przypadkowego ponownego zamknięcia
         }
     }
 }

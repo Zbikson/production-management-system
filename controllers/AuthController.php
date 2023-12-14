@@ -1,6 +1,6 @@
 <?php
 require_once 'models/User.php';
-require_once __DIR__ . '/../includes/Database.php';
+require_once __DIR__ . '/../models/Database.php';
 class AuthController {
     public function login() {
 
@@ -19,7 +19,7 @@ class AuthController {
                 $_SESSION['lastname'] = $user->getLastname();
                 $_SESSION['role'] = $user->getRole();
 
-                $redirectUrl = ($_SESSION['role'] != 'admin') ? 'dashboard-main' : 'dashboard-admin';
+                $redirectUrl = ($_SESSION['role'] != 'admin') ? 'dashboard-main' : 'list-order';
                 header("Location: index.php?action=$redirectUrl");
                 exit();
 
@@ -39,7 +39,7 @@ class AuthController {
     public function addUser() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $password = $_POST['password'];
             $name = $_POST['name'];
             $lastname = $_POST['lastname'];
             $role = $_POST['role'];
