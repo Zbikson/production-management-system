@@ -3,11 +3,13 @@ session_start();
 
 require_once 'controllers/AuthController.php';
 require_once 'controllers/OrderController.php';
+require_once 'controllers/DetailController.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'login';
 
 $authController = new AuthController();
 $orderController = new OrderController();
+$detailController = new DetailController();
 
 switch($action){
     case 'dashboard-admin':
@@ -58,6 +60,22 @@ switch($action){
     case 'update-order':
         $orderController->updateOrder();
         break;
+    case 'settle-order':
+        $orderId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $orderController->settleOrderView($orderId);
+        break;
+    case 'settle':
+        $orderController->seetleOrder();
+        break;
+
+    // DetalController
+    case 'add-detail-view':
+        $detailController->addDetailView();
+        break;
+    case 'add-detail':
+        $detailController->addDetail();
+        break;
+
     // Default
     default:
         $authController->login();

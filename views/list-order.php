@@ -89,7 +89,7 @@ if($_SESSION['role'] != 'admin'){
                         echo '<td>' . $order['orderNumber'] . '</td>';
                         echo '<td>' . $order['company'] . '</td>';
                         echo '<td>' . $order['detail'] . '</td>';
-                        echo '<td>/' . $order['quantity'] . '</td>';
+                        echo '<td>' . $order['quantityNow'] . "/" . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
                         echo '<td><a href="?action=edit-order&id=' . $order['id'] . '"><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></a></td>';
@@ -110,7 +110,6 @@ if($_SESSION['role'] != 'admin'){
             var confirmation = confirm('Czy na pewno chcesz usunąć tego użytkownika?');
 
             if (confirmation) {
-                // Przekieruj do odpowiedniej ścieżki usuwania
                 window.location.href = 'index.php?action=delete-user&id=' + userId;
             }
         }

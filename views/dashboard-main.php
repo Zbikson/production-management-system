@@ -48,6 +48,14 @@ if(!isset($_SESSION['user_id'])){
             echo "<div class='error'>" . $_SESSION['error_edit_order']  . "</div>" ; 
             unset($_SESSION['error_edit_order'] );
         }
+        if(isset($_SESSION['success_settle'] )){
+            echo "<div class='success'>" . $_SESSION['success_settle']  . "</div>" ; 
+            unset($_SESSION['success_settle'] );
+        }
+        if(isset($_SESSION['error_settle'] )){
+            echo "<div class='error'>" . $_SESSION['error_settle']  . "</div>" ; 
+            unset($_SESSION['error_settle'] );
+        }
     ?>
         
         <div class="table table-striped">
@@ -61,6 +69,7 @@ if(!isset($_SESSION['user_id'])){
                     <th>Ilość</th>
                     <th>Data wystawienia</th>
                     <th>Data Wykonania</th>
+                    <th>Rozlicz</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,9 +89,11 @@ if(!isset($_SESSION['user_id'])){
                         echo '<td>' . $order['orderNumber'] . '</td>';
                         echo '<td>' . $order['company'] . '</td>';
                         echo '<td>' . $order['detail'] . '</td>';
-                        echo '<td>/' . $order['quantity'] . '</td>';
+                        echo '<td>' . $order['quantityNow'] . "/" . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
+                        echo '<td><a href="?action=settle-order&id=' . $order['id'] . ' "<button type="button" class="settle-btn" ><i class="bi bi-chevron-right"></i></button></a></td>';
+
                     }
                 } else {
                     //błąd zapytania

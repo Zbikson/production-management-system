@@ -79,6 +79,36 @@ class OrderController{
         exit();
     }
 
+    public function seetleOrder(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $quantityNow = $_POST['quantityNow'];
+            $id = $_POST['id'];
+            
+            if (Order::settle($id, $quantityNow)) {
+                $_SESSION['success_settle'] = 'Rozliczono zlecenie!';
+            } else {
+                $_SESSION['error_settle'] = 'Błąd podczas rozliczania zlecenia!';
+            }
+        }
+        header("Location: index.php?action=dashboard-main");
+        exit();
+    }
+
+    public function settleOrderView($orderId){
+        $database = new Database();
+        $connection = $database->getConnection();
+    
+        // Pobierz dane zlecenia na podstawie przekazanego ID
+        $query = "SELECT * FROM orders WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $order = $result->fetch_assoc();
+    
+        include 'views/settle-order.php';
+    }
+
 public function completedOrderView() {
     include 'views/completed-order.php';
 }
@@ -90,6 +120,8 @@ public function addOrderView() {
 public function listOrderView() {
     include 'views/list-order.php';
 }
+
+
 
 
 }

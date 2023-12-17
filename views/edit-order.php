@@ -26,8 +26,7 @@ if($_SESSION['role'] != 'admin'){
 
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-
+    
     <title>PMS - Edycja zlecenia</title>
 </head>
 <body>
@@ -47,8 +46,17 @@ if($_SESSION['role'] != 'admin'){
             <label for="company">Kontrahent</label>
             <input type="text" id="company" name="company" value="<?php echo $order['company']; ?>"  required>
 
-            <label for="detail">Detal</label>
-            <input type="text" id="detail" name="detail" value="<?php echo $order['detail']; ?>" required>
+            <label for="detail">Detal </label>
+            <select id="detail" name="detail">
+            <option><?php echo $order['detail']; ?></option required>
+                <?php
+                $details = Detail::getDetails();
+                foreach ($details as $detail): ?>
+                    <option value="<?php echo htmlspecialchars($detail['detailName']); ?>">
+                        <?php echo htmlspecialchars($detail['detailName']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
 
             <label for="quantity">Ilość</label>
             <input type="text" id="quantity" name="quantity" value="<?php echo $order['quantity']; ?>" required>

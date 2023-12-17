@@ -95,20 +95,25 @@ class User{
     public static function updateUser($id, $newUsername, $newName, $newLastname, $newPassword, $newRole) {
         $database = new Database();
         $connection = $database->getConnection();
-
-        $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-        $query = "UPDATE users SET username = ?, name = ?, lastname = ?, password = ?, role = ? WHERE id = ?";
-        $stmt = $connection->prepare($query);
-        $stmt->bind_param("sssssi", $newUsername, $newName, $newLastname, $newHashedPassword, $newRole, $id);
-
+    
+        // Sprawdzanie, czy hasło jest puste
+        if ($newPassword !== null) {
+            $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $query = "UPDATE users SET username = ?, name = ?, lastname = ?, password = ?, role = ? WHERE id = ?";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("sssssi", $newUsername, $newName, $newLastname, $newHashedPassword, $newRole, $id);
+        } else {
+            // Jeśli hasło jest puste, aktualizuj bez hasła
+            $query = "UPDATE users SET username = ?, name = ?, lastname = ?, role = ? WHERE id = ?";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("ssssi", $newUsername, $newName, $newLastname, $newRole, $id);
+        }
+    
         $success = $stmt->execute();
-
         $stmt->close();
-
         return $success;
     }
-
+    
 
     // Pobieranie ID użytkownika
     public function getId() { 

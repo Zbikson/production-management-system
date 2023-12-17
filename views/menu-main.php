@@ -4,8 +4,8 @@
     <ol>
         <li><i class="bi bi-collection"></i> Zlecenia</li>
             <ul>
-                <a href=""><li>Wszystkie</li></a>
-                <li>W realizacji</li>
+                <a href=""><li>Do realizacji</li></a>
+                <li>Zrealizowane</li>
             </ul>
     </ol>
 
@@ -23,8 +23,8 @@
             echo "Użytkownik: " . $_SESSION['username'] . " • ";
             echo "Imię: " . $_SESSION['name'] . " • ";
             echo "Nazwisko: " . $_SESSION['lastname'] . "<br>";
-            echo "Data: ". date('d/m/Y'); 
-            echo " Godzina: ". date(' H:i');
+            echo "Data: ". date('d/m/Y') . " • "; 
+            echo "Godzina: ". date(' H:i');
         }
         ?>
     </div>
@@ -32,9 +32,9 @@
     <div class="control-panel">
         <?php
         if($_SESSION['role'] == 'admin'){
-            echo '<a id="panel-btn" href="index.php?action=dashboard-admin" title="Panel zleceń"><i class="bi bi-terminal"></i>Panel administratora</a>';
+            echo '<a id="panel-btn" href="index.php?action=list-order" title="Panel zleceń"><i class="bi bi-terminal"></i>Panel administratora</a>';
         } else{
-            echo '<a id="panel-disable" href="index.php?action=dashboard-admin" title="Panel zleceń">Panel administratora</a>';
+            echo '<a id="panel-disable" href="index.php?action=list-order" title="Panel zleceń">Panel administratora</a>';
         }
         ?>
         

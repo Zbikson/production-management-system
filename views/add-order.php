@@ -43,13 +43,22 @@ if($_SESSION['role'] != 'admin'){
     ?>
     <form id="add-order-form" action="?controller=OrderController&action=add" method="post">
         <label for="order-number">Numer zlecenia </label>
-            <input type="text" name="order-number" id="order-number" required>
+        <?php $orderNumber = Order::generateOrderNumber(); ?>
+            <input type="text" name="order-number" id="order-number" value="<?php echo htmlspecialchars($orderNumber); ?>" required>
 
         <label for="company">Firma </label>
             <input type="text" name="company" id="company" required>
 
         <label for="detail">Detal </label>
-            <input type="text" name="detail" id="detail" required>
+        <select id="detail" name="detail">
+            <?php
+            $details = Detail::getDetails();
+            foreach ($details as $detail): ?>
+                <option value="<?php echo htmlspecialchars($detail['detailName']); ?>">
+                    <?php echo htmlspecialchars($detail['detailName']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
             
         <label for="quantity">Ilość </label>
             <input type="number" min="1" name="quantity" id="quantity" required>

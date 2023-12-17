@@ -85,5 +85,44 @@ class Order{
         return $success;
     }
 
+    public static function settle($id, $quantityToAdd) {
+        $database = new Database();
+        $connection = $database->getConnection();
+    
+        // Najpierw pobierz aktualną i całkowitą ilość dla zlecenia
+        $query = "SELECT quantityNow, quantity FROM orders WHERE id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $order = $result->fetch_assoc();
+            $currentQuantity = $order['quantityNow'];
+            $totalQuantity = $order['quantity'];
+    
+            $newQuantity = $currentQuantity + $quantityToAdd;
+    
+            if ($newQuantity <= $totalQuantity) {
+                // Aktualizuj ilość w zleceniu
+                $updateQuery = "UPDATE orders SET quantityNow = ? WHERE id = ?";
+                $updateStmt = $connection->prepare($updateQuery);
+                $updateStmt->bind_param("ii", $newQuantity, $id);
+                $success = $updateStmt->execute();
+                $updateStmt->close();
+                return $success;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+
+    public static function generateOrderNumber() {
+        $currentDateTime = new DateTime();
+        return 'ORD-' . $currentDateTime->format('YmdHis') . '-' . rand(100, 999);
+    }
+
 }
 ?>

@@ -112,8 +112,8 @@ class AuthController {
             $newUsername = $_POST['username'];
             $newName = $_POST['name'];
             $newLastname = $_POST['lastname'];
-            $newPassword = $_POST['password'];
-            $newRole = $_POST['role'];
+            $newPassword = !empty($_POST['password']) ? $_POST['password'] : null;
+            $newRole = $_POST['role'];            
 
             // Wywołaj funkcję do aktualizacji danych użytkownika
             if (User::updateUser($userId, $newUsername, $newName, $newLastname, $newPassword, $newRole)) {

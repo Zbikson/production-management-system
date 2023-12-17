@@ -16,7 +16,7 @@
         </li>
         <li class="menu-item" ><i class="bi bi-gear"></i> Opcje
             <ul>
-                <a href="#" ><li>Dane firmy</li></a>
+                <a href="index.php?action=add-detail-view" ><li>Dodaj detale</li></a>
             </ul>
         </li>
     </ol>
