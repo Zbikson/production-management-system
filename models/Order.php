@@ -8,15 +8,17 @@ class Order{
     private $company;
     private $detail;
     private $quantity;
+    private $quantityNow;
     private $issueDate;
     private $executionDate;
     
 
-    public function __construct($orderNumber, $company, $detail, $quantity, $issueDate, $executionDate){
+    public function __construct($orderNumber, $company, $detail, $quantity, $quantityNow, $issueDate, $executionDate){
         $this->orderNumber = $orderNumber;
         $this->company = $company;
         $this->detail= $detail;
         $this->quantity = $quantity;
+        $this->quantityNow = $quantityNow;
         $this->issueDate = $issueDate;
         $this->executionDate = $executionDate;
     }
@@ -25,8 +27,8 @@ class Order{
         $database = new Database();
         $connection = $database->getConnection();
 
-        $stmt = $connection->prepare("INSERT INTO orders (orderNumber, company, detail, quantity, issueDate, executionDate) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssiss", $this->orderNumber, $this->company, $this->detail, $this->quantity, $this->issueDate, $this->executionDate);
+        $stmt = $connection->prepare("INSERT INTO orders (orderNumber, company, detail, quantity, quantityNow, issueDate, executionDate) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssiiss", $this->orderNumber, $this->company, $this->detail, $this->quantity, $this->quantityNow, $this->issueDate, $this->executionDate);
         $stmt->execute();
 
         $this->id = $connection->insert_id;
@@ -68,6 +70,28 @@ class Order{
         $stmt->close();
 
         return $order;
+    }
+
+    public static function getByOrderName($order) {
+        $database = new Database();
+        $conn = $database->getConnection();
+
+        // Sprawdzanie połączenia
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM orders WHERE orderNumber = '$order'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $order = new Order($row['orderNumber'], $row['company'], $row['detail'], $row['quantity'], $row['quantityNow'], $row['issueDate'], $row['executionDate']);
+            $order->id = $row['id'];
+            return $order;
+        } else {
+            return null;
+        }
     }
 
     public static function update($id, $newOrderNumber, $newCompany, $newDetail, $newQuantity, $newIssueDate, $newExecutionDate) {

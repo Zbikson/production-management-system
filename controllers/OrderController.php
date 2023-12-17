@@ -10,14 +10,20 @@ class OrderController{
             $company = $_POST['company'];
             $detail = $_POST['detail'];
             $quantity = $_POST['quantity'];
+            $quantityNow = $_POST['quantity-now'];
             $issueDate = $_POST['issue-date'];
             $executionDate = $_POST['execution-date'];
 
-            $newOrder = new Order($orderNumber, $company, $detail, $quantity, $issueDate, $executionDate);
+            if (Order::getByOrderName($orderNumber)) {
+                $_SESSION['error_add_order'] = 'Zlecenie o takiej nazwie już istnieje!';
+                header('Location: index.php?action=add-order');
+            }else{
+                $newOrder = new Order($orderNumber, $company, $detail, $quantity, $quantityNow, $issueDate, $executionDate);
+                $newOrder->save();
+                header('Location: index.php?action=add-order');
+                $_SESSION['success_add_order'] = 'Dodano zlecenie!';
+            }
 
-            $newOrder->save();
-            header('Location: index.php?action=add-order');
-            $_SESSION['success_add_order'] = 'Dodano zlecenie!';
         }
     }
 

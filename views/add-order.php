@@ -40,11 +40,17 @@ if($_SESSION['role'] != 'admin'){
             echo "<div class='success'>" . $_SESSION['success_add_order'] . "</div>";
             unset($_SESSION['success_add_order']);
         }
+        if(isset($_SESSION['error_add_order'])){
+            echo "<div class='error'>" . $_SESSION['error_add_order'] . "</div>";
+            unset($_SESSION['error_add_order']);
+        }
+
     ?>
     <form id="add-order-form" action="?controller=OrderController&action=add" method="post">
-        <label for="order-number">Numer zlecenia </label>
+
+        <label for="order-number">Numer zlecenia (generowany automatcznie)</label>
         <?php $orderNumber = Order::generateOrderNumber(); ?>
-            <input type="text" name="order-number" id="order-number" value="<?php echo htmlspecialchars($orderNumber); ?>" required>
+        <input type="text" name="order-number" id="order-number" value="<?php echo htmlspecialchars($orderNumber); ?>" required>
 
         <label for="company">Firma </label>
             <input type="text" name="company" id="company" required>
@@ -62,6 +68,8 @@ if($_SESSION['role'] != 'admin'){
             
         <label for="quantity">Ilość </label>
             <input type="number" min="1" name="quantity" id="quantity" required>
+
+        <input type="hidden" id="quantity-now" name="quantity-now" value=0>
 
         <label for="issue-date">Data wystawienia </label>
             <input type="date" name="issue-date" id="issue-date" required>

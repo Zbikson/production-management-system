@@ -33,7 +33,7 @@ if($_SESSION['role'] != 'admin'){
 <?php include 'views/menu-admin.php'; ?>
 
 <div class="main-content" id="add-order">
-<h2>Dodaj zlecenie</h2>
+<h2>Dodaj detal</h2>
 
     <?php 
         if(isset($_SESSION['success_detail'])){
