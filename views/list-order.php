@@ -34,12 +34,6 @@ if($_SESSION['role'] != 'admin'){
 <?php include 'views/menu-admin.php'; ?>
 
 <div class="main-content" id="list-order">
-    <!-- <div id="search-bar">
-        <form action="">
-            <input type="text" placeholder="Wyszukaj...">
-            <button type="submit"><i class="bi bi-search"></i></button>
-        </form>
-    </div> -->
     <h2>Lista zleceń</h2>
 
     <?php

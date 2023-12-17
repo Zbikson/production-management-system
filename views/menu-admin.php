@@ -1,5 +1,5 @@
 <div class="sidebar">
-<a href="index.php?action=dashboard-admin" ><h1>PMS</h1></a>
+<h1>PMS</h1>
     <ol>
         <li class="menu-item" ><i class="bi bi-collection"></i> Zlecenia
             <ul>

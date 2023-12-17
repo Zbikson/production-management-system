@@ -6,10 +6,6 @@ if(!isset($_SESSION['user_id'])){
     header('Location: index.php?action=login');
     exit();
 }
-if($_SESSION['role'] != 'admin'){
-    header('Location: index.php?action=dashboard-main');
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -35,29 +31,40 @@ if($_SESSION['role'] != 'admin'){
 
     <div class="main-content" >
     <h2>Rozliczanie zlecenia</h2>
+
+    <div class="detail-info-container">
+        <div class="detail-info" id="order-number">
+            <b>Numer zlecenia</b><br> <?php echo $order['orderNumber']; ?>
+        </div>
+
+        <div class="detail-info" id="company">
+            <b>Kontrahent</b><br> <?php echo $order['company']; ?>
+        </div>
+        
+        <div class="detail-info" id="detail">
+            <b>Detal</b><br> <?php echo $order['detail']; ?>
+        </div>
+        
+        <div class="detail-info" id="quantity">
+            <b>Ilość</b><br> <?php echo  $order['quantityNow'] . "/" . $order['quantity']; ?>
+        </div>
+
+        <div class="detail-info" id="issueDate">
+            <b>Data wystawienia</b><br> <?php echo $order['issueDate']; ?>
+        </div>
+        
+        <div class="detail-info" id="executionDate">
+            <b>Data wykonania</b><br> <?php echo $order['executionDate']; ?>
+        </div>
+        
+    </div>
+
         <form id="seetle-order" action="?controller=OrderController&action=settle" method="post">
             <input type="hidden" id="id" name="id" value="<?php echo $order['id']; ?>">
 
             <label for="quantityNow" >Wykonana ilość</label>
             <input type="text" id="quantityNow" name="quantityNow" required>
-            
-            <label for="orderNumber" >Numer zlecenia</label>
-            <input type="text" id="orderNumber" name="orderNumber" value="<?php echo $order['orderNumber']; ?>" required disabled>
 
-            <label for="company">Kontrahent</label>
-            <input type="text" id="company" name="company" value="<?php echo $order['company']; ?>"  required disabled>
-
-            <label for="detail">Detal</label>
-            <input type="text" id="detail" name="detail" value="<?php echo $order['detail']; ?>" required disabled>
-
-            <label for="quantity">Ilość</label>
-            <input type="text" id="quantity" name="quantity" value="<?php echo $order['quantity']; ?>" required disabled>
-
-            <label for="issueDate">Data wystawienia</label>
-            <input type="date" id="issueDate" name="issueDate" value="<?php echo $order['issueDate']; ?>" required disabled>
-
-            <label for="executionDate">Data wykonania</label>
-            <input type="date" id="executionDate" name="executionDate" value="<?php echo $order['executionDate']; ?>" required disabled>
 
             <button type="submit" id="submit-btn">Rozlicz</button>
         </form>

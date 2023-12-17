@@ -29,12 +29,8 @@ if(!isset($_SESSION['user_id'])){
 <?php include 'views/menu-main.php'; ?>
 
 <div class="main-content" id="main-dashboard">
-        <div id="search-bar">
-            <form action="">
-                <input type="text" placeholder="Wyszukaj...">
-                <button type="submit"><i class="bi bi-search"></i></button>
-            </form>
 
+<h2>Lista zleceń do realizacji</h2>
             <?php
         if(isset($_SESSION['success_delete_order'])){
             echo "<div class='error'>" . $_SESSION['success_delete_order'] . "</div>" ; 
