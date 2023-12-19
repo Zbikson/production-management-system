@@ -74,7 +74,7 @@ switch($action){
         $orderController->infoOrderMain();
         break;
 
-    // DetalController
+    // DetailController
     case 'add-detail-view':
         $detailController->addDetailView();
         break;

@@ -12,7 +12,7 @@ class DetailController {
                 $_SESSION['error_detail'] = 'Detal o takiej nazwie już istnieje!';
                 header('Location: index.php?action=add-detail');
             }else{
-                // Tworzenie nowego użytkownika
+                // Tworzenie nowego detalu
                 $newDetail = new Detail($detail);
                 $newDetail->save();
 
