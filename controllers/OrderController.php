@@ -131,9 +131,11 @@ public function addOrderView() {
 public function listOrderView() {
     include 'views/list-order.php';
 }
-
 public function infoOrder() {
     include 'views/info-order.php';
+}
+public function infoOrderMain() {
+    include 'views/info-order-main.php';
 }
 
 

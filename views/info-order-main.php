@@ -27,7 +27,7 @@ if(!isset($_SESSION['user_id'])){
 
 <div class="container">
     
-<?php include 'views/menu-admin.php'; ?>
+<?php include 'views/menu-main.php'; ?>
 
 <div class="main-content">
 <h2>Informacje o zakończonym zleceniu</h2>

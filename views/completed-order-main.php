@@ -70,7 +70,7 @@ if(!isset($_SESSION['user_id'])){
                         echo '<td>' . $order['quantityNow'] . "/" . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
-                        echo '<td><a href="?action=info-order&orderId=' . $order['id'] . ' "<button type="button" class="settle-btn" ><i class="bi bi-chevron-right"></i></button></a></td>';
+                        echo '<td><a href="?action=info-order-main&orderId=' . $order['id'] . ' "<button type="button" class="settle-btn" ><i class="bi bi-chevron-right"></i></button></a></td>';
 
                     }
                 } else {

@@ -70,6 +70,9 @@ switch($action){
     case 'info-order':
         $orderController->infoOrder();
         break;
+    case 'info-order-main':
+        $orderController->infoOrderMain();
+        break;
 
     // DetalController
     case 'add-detail-view':
