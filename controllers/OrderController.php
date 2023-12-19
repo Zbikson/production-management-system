@@ -119,6 +119,10 @@ public function completedOrderView() {
     include 'views/completed-order.php';
 }
 
+public function completedOrderMainView() {
+    include 'views/completed-order-main.php';
+}
+
 public function addOrderView() {
     include 'views/add-order.php';
 }

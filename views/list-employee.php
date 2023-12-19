@@ -99,16 +99,6 @@ if($_SESSION['role'] != 'admin'){
 
     </div>
     
-    <script>
-        function confirmDelete(userId) {
-            var confirmation = confirm('Czy na pewno chcesz usunąć tego użytkownika?');
-
-            if (confirmation) {
-                // Przekieruj do odpowiedniej ścieżki usuwania
-                window.location.href = 'index.php?action=delete-user&id=' + userId;
-            }
-        }
-    </script>
 
 
 </div>

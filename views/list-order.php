@@ -71,7 +71,7 @@ if($_SESSION['role'] != 'admin'){
                 $database = new Database();
                 $connection = $database->getConnection();
 
-                $query = "SELECT * FROM orders";
+                $query = "SELECT * FROM orders WHERE status = 0";
                 $result = $connection->query($query);
 
                 if ($result) {
@@ -99,15 +99,6 @@ if($_SESSION['role'] != 'admin'){
         </table>
     </div>
 
-    <script>
-        function confirmDelete(userId) {
-            var confirmation = confirm('Czy na pewno chcesz usunąć tego użytkownika?');
-
-            if (confirmation) {
-                window.location.href = 'index.php?action=delete-user&id=' + userId;
-            }
-        }
-    </script>
 </div>
 
 </body>

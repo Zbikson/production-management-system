@@ -109,6 +109,9 @@ class Order{
         return $success;
     }
 
+    // Status 0 - w trakcie
+    // Status 1 - zakończone
+
     public static function settle($id, $quantityToAdd) {
         $database = new Database();
         $connection = $database->getConnection();
@@ -131,9 +134,19 @@ class Order{
                 $updateQuery = "UPDATE orders SET quantityNow = ? WHERE id = ?";
                 $updateStmt = $connection->prepare($updateQuery);
                 $updateStmt->bind_param("ii", $newQuantity, $id);
-                $success = $updateStmt->execute();
+                $updateStmt->execute();
                 $updateStmt->close();
-                return $success;
+    
+                // Jeśli ilość zadana jest równa ilości wykonanej, uaktualnij status zlecenia
+                if ($newQuantity == $totalQuantity) {
+                    $updateStatusQuery = "UPDATE orders SET status = 1 WHERE id = ?";
+                    $updateStatusStmt = $connection->prepare($updateStatusQuery);
+                    $updateStatusStmt->bind_param("i", $id);
+                    $updateStatusStmt->execute();
+                    $updateStatusStmt->close();                    
+                }
+    
+                return true;
             } else {
                 return false;
             }
@@ -141,6 +154,7 @@ class Order{
             return false;
         }
     }
+    
     
 
     public static function generateOrderNumber() {

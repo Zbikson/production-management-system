@@ -5,7 +5,7 @@
         <li><i class="bi bi-collection"></i> Zlecenia</li>
             <ul>
                 <a href="index.php?action=dashboard-main"><li>Do realizacji</li></a>
-                <li>Zrealizowane</li>
+                <a href="index.php?action=completed-order-main"><li>Zakończone</li></a>
             </ul>
     </ol>
 

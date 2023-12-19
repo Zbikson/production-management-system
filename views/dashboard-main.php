@@ -73,7 +73,7 @@ if(!isset($_SESSION['user_id'])){
                 $database = new Database();
                 $connection = $database->getConnection();
 
-                $query = "SELECT * FROM orders";
+                $query = "SELECT * FROM orders WHERE status = 0";
                 $result = $connection->query($query);
 
                 if ($result) {

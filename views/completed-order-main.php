@@ -6,10 +6,6 @@ if(!isset($_SESSION['user_id'])){
     header('Location: index.php?action=login');
     exit();
 }
-if($_SESSION['role'] != 'admin'){
-    header('Location: index.php?action=dashboard-main');
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -31,24 +27,13 @@ if($_SESSION['role'] != 'admin'){
 
 <div class="container">
 
-<?php include 'views/menu-admin.php'; ?>
+<?php include 'views/menu-main.php'; ?>
 
 <div class="main-content" id="list-order">
     <h2>Lista zakończonych zleceń</h2>
 
     <?php
-        if(isset($_SESSION['success_delete_order'])){
-            echo "<div class='error'>" . $_SESSION['success_delete_order'] . "</div>" ; 
-            unset($_SESSION['success_delete_order']);
-        }
-        if(isset($_SESSION['success_edit_order'] )){
-            echo "<div class='success'>" . $_SESSION['success_edit_order']  . "</div>" ; 
-            unset($_SESSION['success_edit_order'] );
-        }
-        if(isset($_SESSION['error_edit_order'] )){
-            echo "<div class='error'>" . $_SESSION['error_edit_order']  . "</div>" ; 
-            unset($_SESSION['error_edit_order'] );
-        }
+
     ?>
         
         <div class="table table-striped">
@@ -62,8 +47,6 @@ if($_SESSION['role'] != 'admin'){
                     <th>Ilość</th>
                     <th>Data wystawienia</th>
                     <th>Data Wykonania</th>
-                    <th>Edytuj</th>
-                    <th>Usuń</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,9 +69,7 @@ if($_SESSION['role'] != 'admin'){
                         echo '<td>' . $order['quantityNow'] . "/" . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
-                        echo '<td><a href="?action=edit-order&id=' . $order['id'] . '"><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></a></td>';
-                        echo '<td><a href="?action=delete-order&id=' . $order['id'] . ' " onclick="return confirm(\'Czy na pewno chcesz usunąć to zlecenie?\' );"><button type="button" class="trash-btn" ><i class="bi bi-trash3"></i></button></a></td>';
-
+                    
                     }
                 } else {
                     //błąd zapytania

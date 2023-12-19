@@ -45,6 +45,9 @@ switch($action){
     case 'completed-order':
         $orderController->completedOrderView();
         break;
+    case 'completed-order-main':
+        $orderController->completedOrderMainView();
+        break;
     case 'list-order':
         $orderController->listOrderView();
         break;
