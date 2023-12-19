@@ -112,8 +112,7 @@ class User{
         $success = $stmt->execute();
         $stmt->close();
         return $success;
-    }
-    
+    }    
 
     // Pobieranie ID użytkownika
     public function getId() { 

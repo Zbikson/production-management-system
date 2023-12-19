@@ -27,7 +27,13 @@ if(!isset($_SESSION['user_id'])){
 
 <div class="container">
     
-<?php include 'views/menu-main.php'; ?>
+<?php 
+    if($_SESSION["role"] != 'admin'){
+        include 'views/menu-main.php'; 
+    }else{
+        include 'views/menu-admin.php'; 
+    }
+?>
 
 <div class="main-content">
 <h2>Informacje o zakończonym zleceniu</h2>
