@@ -112,7 +112,7 @@ class Order{
     // Status 0 - w trakcie
     // Status 1 - zakończone
 
-    public static function settle($id, $quantityToAdd) {
+    public static function settle($id, $quantityToAdd, $userId) {
         $database = new Database();
         $connection = $database->getConnection();
     
@@ -136,6 +136,13 @@ class Order{
                 $updateStmt->bind_param("ii", $newQuantity, $id);
                 $updateStmt->execute();
                 $updateStmt->close();
+
+                        $currentDateTime = date('Y-m-d H:i:s'); // Pobierz aktualną datę i czas
+                        $progressQuery = "INSERT INTO user_order_progress (order_id, user_id, completed_quantity, date_completed) VALUES (?, ?, ?, ?)";
+                        $progressStmt = $connection->prepare($progressQuery);
+                        $progressStmt->bind_param("iiis", $id, $userId, $quantityToAdd, $currentDateTime);
+                        $progressStmt->execute();
+                        $progressStmt->close();
     
                 // Jeśli ilość zadana jest równa ilości wykonanej, uaktualnij status zlecenia
                 if ($newQuantity == $totalQuantity) {
@@ -143,7 +150,8 @@ class Order{
                     $updateStatusStmt = $connection->prepare($updateStatusQuery);
                     $updateStatusStmt->bind_param("i", $id);
                     $updateStatusStmt->execute();
-                    $updateStatusStmt->close();                    
+                    $updateStatusStmt->close();             
+                    $_SESSION['success_settle_end'] = 'Zlecenie zakończone - przeniesione do "Zlecenia zakończone"!';       
                 }
     
                 return true;
@@ -154,6 +162,32 @@ class Order{
             return false;
         }
     }
+
+    public static function showOrderDetails($orderId) {
+        $database = new Database();
+        $connection = $database->getConnection();
+    
+        $query = "SELECT o.orderNumber, o.orderNumber, uop.user_id, u.username AS user_name, uop.completed_quantity, uop.date_completed
+                  FROM user_order_progress uop
+                  JOIN users u ON uop.user_id = u.id
+                  JOIN orders o ON uop.order_id = o.id
+                  WHERE uop.order_id = ?";
+    
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("i", $orderId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result) {
+            return $result->fetch_all(MYSQLI_ASSOC);
+        } else {
+            echo "Błąd zapytania: " . $connection->error;
+            return null;
+        }
+    }
+    
+    
+    
     
     
 

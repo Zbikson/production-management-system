@@ -89,8 +89,9 @@ class OrderController{
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $quantityNow = $_POST['quantityNow'];
             $id = $_POST['id'];
+            $userId = $_SESSION["user_id"];
             
-            if (Order::settle($id, $quantityNow)) {
+            if (Order::settle($id, $quantityNow, $userId)) {
                 $_SESSION['success_settle'] = 'Rozliczono zlecenie!';
             } else {
                 $_SESSION['error_settle'] = 'Błąd podczas rozliczania zlecenia!';
@@ -131,12 +132,10 @@ public function listOrderView() {
     include 'views/list-order.php';
 }
 
-
-
-
+public function infoOrder() {
+    include 'views/info-order.php';
 }
 
 
-
-
+}
 ?>

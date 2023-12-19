@@ -23,6 +23,13 @@ body{
     background-color: #269631b2;
 }
 
+.end{
+    color: #fff;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #3b80d0;
+}
+
 a:link {
     text-decoration: none;
     color: #fff;

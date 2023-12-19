@@ -47,6 +47,7 @@ if(!isset($_SESSION['user_id'])){
                     <th>Ilość</th>
                     <th>Data wystawienia</th>
                     <th>Data Wykonania</th>
+                    <th>Informacje</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,7 +70,8 @@ if(!isset($_SESSION['user_id'])){
                         echo '<td>' . $order['quantityNow'] . "/" . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
-                    
+                        echo '<td><a href="?action=info-order&orderId=' . $order['id'] . ' "<button type="button" class="settle-btn" ><i class="bi bi-chevron-right"></i></button></a></td>';
+
                     }
                 } else {
                     //błąd zapytania
@@ -79,6 +81,7 @@ if(!isset($_SESSION['user_id'])){
             </tbody>
         </table>
     </div>
+
 
 </div>
 

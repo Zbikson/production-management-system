@@ -70,6 +70,9 @@ switch($action){
     case 'settle':
         $orderController->seetleOrder();
         break;
+    case 'info-order':
+        $orderController->infoOrder();
+        break;
 
     // DetalController
     case 'add-detail-view':

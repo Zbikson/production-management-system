@@ -52,6 +52,11 @@ if(!isset($_SESSION['user_id'])){
             echo "<div class='error'>" . $_SESSION['error_settle']  . "</div>" ; 
             unset($_SESSION['error_settle'] );
         }
+        if(isset($_SESSION['success_settle_end'] )){
+            echo "<div class='end'>" . $_SESSION['success_settle_end']  . "</div>" ; 
+            unset($_SESSION['success_settle_end'] );
+        }
+
     ?>
         
         <div class="table table-striped">

@@ -62,7 +62,6 @@ if($_SESSION['role'] != 'admin'){
                     <th>Ilość</th>
                     <th>Data wystawienia</th>
                     <th>Data Wykonania</th>
-                    <th>Edytuj</th>
                     <th>Usuń</th>
                 </tr>
             </thead>
@@ -86,7 +85,7 @@ if($_SESSION['role'] != 'admin'){
                         echo '<td>' . $order['quantityNow'] . "/" . $order['quantity'] . '</td>';
                         echo '<td>' . $order['issueDate'] . '</td>';
                         echo '<td>' . $order['executionDate'] . '</td>';
-                        echo '<td><a href="?action=edit-order&id=' . $order['id'] . '"><button type="button" class="edit-btn"><i class="bi bi-pencil-square"></i></button></a></td>';
+                        echo '<td><a href="?action=info-order&orderId=' . $order['id'] . ' "<button type="button" class="settle-btn" ><i class="bi bi-chevron-right"></i></button></a></td>';
                         echo '<td><a href="?action=delete-order&id=' . $order['id'] . ' " onclick="return confirm(\'Czy na pewno chcesz usunąć to zlecenie?\' );"><button type="button" class="trash-btn" ><i class="bi bi-trash3"></i></button></a></td>';
 
                     }
