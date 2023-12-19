@@ -62,6 +62,7 @@ if($_SESSION['role'] != 'admin'){
                     <th>Ilość</th>
                     <th>Data wystawienia</th>
                     <th>Data Wykonania</th>
+                    <th>Informacje</th>
                     <th>Usuń</th>
                 </tr>
             </thead>
