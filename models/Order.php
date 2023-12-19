@@ -186,11 +186,6 @@ class Order{
         }
     }
     
-    
-    
-    
-    
-
     public static function generateOrderNumber() {
         $currentDateTime = new DateTime();
         return 'ORD-' . $currentDateTime->format('YmdHis') . '-' . rand(100, 999);

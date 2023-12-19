@@ -67,7 +67,6 @@ class User{
             $stmt->close();
             return true;
         } else {
-            // Logowanie błędu do pliku lub innego systemu logów
             error_log("Błąd usuwania użytkownika: " . $stmt->error);
             
             $stmt->close();

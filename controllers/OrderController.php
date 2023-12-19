@@ -15,7 +15,7 @@ class OrderController{
             $executionDate = $_POST['execution-date'];
 
             if (Order::getByOrderName($orderNumber)) {
-                $_SESSION['error_add_order'] = 'Zlecenie o takiej nazwie już istnieje!';
+                $_SESSION['error_add_order'] = 'Zlecenie o takim numerze już istnieje!';
                 header('Location: index.php?action=add-order');
             }else{
                 $newOrder = new Order($orderNumber, $company, $detail, $quantity, $quantityNow, $issueDate, $executionDate);
