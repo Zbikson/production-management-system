@@ -12,9 +12,6 @@ $orderController = new OrderController();
 $detailController = new DetailController();
 
 switch($action){
-    case 'dashboard-admin':
-        $authController->dashboardAdmin();
-        break;
     case 'dashboard-main':
         $authController->dashboardMain();
         break;

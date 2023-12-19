@@ -34,7 +34,7 @@ if($_SESSION['role'] != 'admin'){
 <?php include 'views/menu-admin.php'; ?>
 
 <div class="main-content" id="list-order">
-    <h2>Lista zakończonych zleceń</h2>
+    <h2>PMS - Lista zakończonych zleceń</h2>
 
     <?php
         if(isset($_SESSION['success_delete_order'])){

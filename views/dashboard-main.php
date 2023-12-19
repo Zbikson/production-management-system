@@ -20,7 +20,7 @@ if(!isset($_SESSION['user_id'])){
     
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <title>Panel zleceń</title>
+    <title>PMS - Panel zleceń</title>
 </head>
 <body>
 
